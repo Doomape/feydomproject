@@ -8,8 +8,19 @@
 </head>
 
 <body>
-<!--header-->
-<?php include 'master/header.php'; ?>
-
+<div id="wrap">
+    <div id="main">
+        <!--header-->
+        <?php include 'master/header.php'; ?>
+        <!--left-side-->
+        <?php include 'master/left-side.php'; ?>
+        <!--main content-->
+        <div id="maincontent">
+        </div>
+        <div style="clear:both"></div>
+    </div>
+</div>
+<!--footer-->
+<?php include 'master/footer.php'; ?>
 </body>
 </html>

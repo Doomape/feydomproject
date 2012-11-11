@@ -41,9 +41,103 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/*master*/
 #header
 {
-	width:99%;
-	height:200px;
-	background-color:#000;
+	width:1026px;
+	height:205px;
+	margin:auto;
 }
+#footer
+{
+	width:1026px;
+	background-color:#000;
+	position: relative;
+	margin-top: -70px; /* negative value of footer height */
+	height: 70px;
+	clear:both;
+}
+#wrap
+{
+	width:1026px;
+	margin:auto;
+	min-height: 100%;
+}
+#main
+{
+	overflow:auto;
+	padding-bottom: 70px;
+}
+#sidebar
+{
+	width:205px;
+	float:left;
+}
+#maincontent
+{
+	width:821px;
+	float:left;
+}
+/*~master*/
+
+/*index*/
+#logo
+{
+	background:url(images/feydom_logo.png) no-repeat;
+	float:left;
+	height:205px;
+	width:411px;
+}
+#imgup_1
+{
+	background:url(images/product.png) no-repeat;
+	float:left;
+	width:205px;
+	height:205px;
+}
+#imgup_2
+{
+	background:url(images/about_us.png) no-repeat;
+	float:left;
+	width:205px;
+	height:205px;
+}
+#imgup_3
+{
+	background:url(images/contact.png) no-repeat;
+	float:left;
+	width:205px;
+	height:205px;
+}
+#imgside_1
+{
+	background:url(images/events.png) no-repeat;
+	width:205px;
+	height:205px;
+}
+#imgside_2
+{
+	background:url(images/design_studio.png) no-repeat;
+	width:205px;
+	height:205px;
+}
+#imgside_3
+{
+	background:url(images/show_room.png) no-repeat;
+	width:205px;
+	height:205px;
+}
+#imgside_4
+{
+	background:url(images/factory.png) no-repeat;
+	width:205px;
+	height:205px;
+}
+#imgside_5
+{
+	background:url(images/feydom_catalog.png) no-repeat;
+	width:205px;
+	height:205px;
+}
+/*~index*/
