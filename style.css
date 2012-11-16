@@ -110,6 +110,11 @@ table {
 	width:205px;
 	height:205px;
 }
+.imgside
+{
+	width:205px;
+	height:205px;
+}
 #imgside_1
 {
 	background:url(images/events.png) no-repeat;

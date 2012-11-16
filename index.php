@@ -3,6 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="style.css">
+ <script type="text/javascript" src="Scripts/jquery.js"></script>
+ <script src="http://code.jquery.com/jquery-latest.js"></script>
+ <script type="text/javascript" src="Scripts/jquery-1.4.2.min.js"></script>
 
 <title>Feydom</title>
 </head>
@@ -16,6 +19,10 @@
         <?php include 'master/left-side.php'; ?>
         <!--main content-->
         <div id="maincontent">
+			<div id="contentTop">
+			</div>
+			<div id="contentBottom">
+			</div>
         </div>
         <div style="clear:both"></div>
     </div>
