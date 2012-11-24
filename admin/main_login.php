@@ -1,28 +1,19 @@
-<table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-<tr>
-<form name="form1" method="post" action="checklogin.php">
-<td>
-<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
-<tr>
-<td colspan="3"><strong>Member Login </strong></td>
-</tr>
-<tr>
-<td width="78">Username</td>
-<td width="6">:</td>
-<td width="294"><input name="myusername" type="text" id="myusername"></td>
-</tr>
-<tr>
-<td>Password</td>
-<td>:</td>
-<td><input name="mypassword" type="text" id="mypassword"></td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td><input type="submit" name="Submit" value="Login"></td>
-</tr>
-</table>
-</td>
-</form>
-</tr>
-</table>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <meta name="description" content="slick Login">
+    <link rel="stylesheet" type="text/css" href="login_files/style.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
+    <script type="text/javascript" src="login_files/placeholder.js"></script>
+</head>
+<body>
+    <form id="slick-login" name="form1" method="post" action="checklogin.php">
+        <label for="username"></label><input type="text" id="myusername" name="myusername" class="placeholder" placeholder="Корисничко име">
+        <label for="password"></label><input type="password" id="mypassword" name="mypassword" class="placeholder" placeholder="Лозинка">
+        <input type="submit" name="Submit" value="Логирај се">
+    </form>
+</body>
+</html>
