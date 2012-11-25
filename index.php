@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
 <link rel="stylesheet" type="text/css" href="style.css">
  <script type="text/javascript" src="Scripts/jquery.js"></script>
  <script src="http://code.jquery.com/jquery-latest.js"></script>

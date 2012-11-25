@@ -65,15 +65,78 @@ body
 	background-color: #EBEBEB;
 	background-repeat: repeat;
 }
+#add
+{
+background:url('../images/add.png') no-repeat center center;
+height:128px;
+width:128px;
+  position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-left: -24px;
+}
+#edit
+{
+background:url('../images/edit.png') no-repeat center center;
+height:128px;
+width:128px;
+  position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-left: -144px;
+}
+#addtext
+{
+  position: absolute;
+    top: 35%;
+    left: 52.3%;
+    margin-left: -24px;
+	font-weight:bold;
+}
+#edittext
+{
+  position: absolute;
+    top: 35%;
+    left: 52.8%;
+    margin-left: -144px;
+	font-weight:bold;
+}
 </style>
 </head>
 
 <body >
+<div id="addtext">Додавање</div>
+<div id="edittext">Измена</div>
+<div onclick="show_add();" id="add"></div>
+<div onclick="show_edit();" id="edit"></div>
+
 	<div style="width: 1026px;margin: auto;min-height: 100%;">
 		<!--log out button-->
 		<a style="float: right;margin-top: 40px;background: url('../images/logout.png');height: 30px;display: block;width: 30px;" href="?run=logout"></a>
-		<!--image container for loading pictures-->
-		<div id="container" style="margin-top:40px">
+		
+		<!--edit images-->
+		<div style="margin-top:40px;display:none;float:left" id="edit_page">
+			<div id="wrap">
+				<div id="main">
+					<!--header-->
+					<?php include '../master/header.php'; ?>
+					<!--left-side-->
+					<?php include '../master/left-side.php'; ?>
+					<!--main content-->
+					<div id="maincontent">
+						<div id="contentTop">
+						</div>
+						<div id="contentBottom">
+						</div>
+					</div>
+					<div style="clear:both"></div>
+				</div>
+			</div>
+		</div>
+		
+		<!--add images-->
+		<div id="container" style="margin-top:40px;display:none">
+
 			<div class="uploadform">
 				<p class="titletext">Додавање на слика во левата колона</p>
 				<form id="form1" name="form1" action="">
@@ -187,7 +250,24 @@ function calc()
 			});
 		
 	}
-
+function show_add()
+{
+	$("#container").css("display","block");
+	$("#addtext").css("display","none");
+	$("#edittext").css("display","none");
+	$("#edittext").css("display","none");
+	$("#edit").css("display","none");
+	$("#add").css("display","none");
+}
+function show_edit()
+{
+	$("#edit_page").css("display","block");
+	$("#addtext").css("display","none");
+	$("#edittext").css("display","none");
+	$("#edittext").css("display","none");
+	$("#edit").css("display","none");
+	$("#add").css("display","none");
+}
 </script>
 
 </body>
