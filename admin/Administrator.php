@@ -1,6 +1,6 @@
- 
+﻿ 
 <?php
- echo $_SERVER['DOCUMENT_ROOT'];
+// echo $_SERVER['DOCUMENT_ROOT'];
 
 /*checking if there is something in the session if not redirect to login,otherwise get in administrator.php*/
 session_start();
@@ -32,53 +32,167 @@ function logout()
 
 
 <html>
-<head>
 
+<head>
+<link rel="stylesheet" type="text/css" href="../style.css">
 <link rel="stylesheet" href="uploadifyit/uploadify.css" type="text/css" />
 <script type="text/javascript" src="uploadifyit/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="uploadifyit/swfobject.js"></script>
 <script type="text/javascript" src="uploadifyit/jquery.uploadify.v2.1.4.min.js"></script>
+
+<style>
+.titletext
+{
+	margin-bottom: 20px;
+	color: #4B4B4B;
+	font-weight: bold;
+}
+.uploadform
+{
+	margin-bottom: 2px;
+	float: left;
+	border-radius: 15px;
+	border: 2px solid gray;
+	padding: 10px;
+	background: skyBlue;
+	width:300px;
+	margin-right: 5px;
+}
+body
+{
+	color: #333;
+	background: url(//s.ytimg.com/yts/img/refresh/body_noise-vfl_60-qt.png);
+	background-color: #EBEBEB;
+	background-repeat: repeat;
+}
+</style>
 </head>
-<body>
 
-<a href="?run=logout">Logout</a>
-
-<form id="form1" name="form1" action="">
-<input type="file" id="file_upload" name="file_upload" /><br />
-<a href="javascript:$('#file_upload').uploadifyUpload();">Upload File</a>
-</form>
+<body >
+	<div style="width: 1026px;margin: auto;min-height: 100%;">
+		<!--log out button-->
+		<a style="float: right;margin-top: 40px;background: url('../images/logout.png');height: 30px;display: block;width: 30px;" href="?run=logout"></a>
+		<!--image container for loading pictures-->
+		<div id="container" style="margin-top:40px">
+			<div class="uploadform">
+				<p class="titletext">Додавање на слика во левата колона</p>
+				<form id="form1" name="form1" action="">
+					<input type="file" id="file_upload" name="file_upload" /><br />
+					<a id="uploadButton" href="javascript:$('#file_upload').uploadifyUpload();">Додади</a>
+				</form>
+			</div>
+			<div id="upload2" class="uploadform" style="display:none">
+				<p class="titletext">Додавање на главна слика</p>
+				<form id="form2" name="form2" action="">
+				<input type="file" id="file_upload1" name="file_upload1"/><br/>
+				<a id="uploadButton1" href="javascript:$('#file_upload1').uploadifyUpload();">Додади</a>
+				</form>
+			</div>
+			<div style="clear:both"></div>
+				<div id="menu" class="uploadform" style="display:none; float:right">
+					<p class="titletext">Додавање на слики за категорија
+					<input type="checkbox" id="checkboxT" name="checkboxT" onclick="calc();"/></p>
+				</div>
+				<div style="clear:both"></div>
+				<div id="upload3" class="uploadform" style="display:none; float: right;">
+					<form id="form3" name="form3" action="">
+						<input type="file" id="file_upload2" name="file_upload2"/><br/>
+						<a id="uploadButton2" href="javascript:$('#file_upload2').uploadifyUpload();">Додади</a>
+					</form>
+				</div>
+		 </div>
+	 </div>
  
 <script type="text/javascript">
 
 $(document).ready(function() {
-	
-	//alert('I am ready to use uploadify!');
-	$("#file_upload").uploadify({
+<!--upload image for left side bar-->
+	$("#file_upload").uploadify
+	({
 		'uploader': 'uploadifyit/uploadify.swf',
 		'script': 'uploadifyit/uploadify.php',
 		'cancelImg': 'uploadifyit/cancel.png',
-		'folder': 'uploads',
+		'folder': '../images/sidebarImages',
 		'auto': false, // use for auto upload
 		'multi': true,
-		'queueSizeLimit': 2,
-		'onQueueFull': function(event, queueSizeLimit) {
+		'queueSizeLimit': 1,
+		'onQueueFull': function(event, queueSizeLimit) 
+		{
 			alert("Please don't put anymore files in me! You can upload " + queueSizeLimit + " files at once");
 			return false;
 		},
-		'onComplete': function(event, ID, fileObj, response, data) {
-			alert("Filename: " + fileObj.name + "\nSize: " + fileObj.size + "\nFilepath: " + fileObj.filePath);
-
-			
-			// you can use here jQuery AJAX method to send info at server-side.
+		'onComplete': function(event, ID, fileObj, response, data) 
+		{
+			var url_left_sidebar=fileObj.filePath;
+			<!--send the image url to the script that insert that url into the "left_sideBar" table-->
+			$.post("../function/insertLeftSideBar.php", {data: url_left_sidebar });
+			$("#upload2").css('display','block');
+			$("#uploadButton").css('display','none');
+			$("#menu").css('display','block');
+		}
+	});
+	<!--when the image is uploaded, it will be showed another image load for the contentTop image--> 
+	$("#file_upload1").uploadify
+	({
+		'uploader': 'uploadifyit/uploadify.swf',
+		'script': 'uploadifyit/uploadify.php',
+		'cancelImg': 'uploadifyit/cancel.png',
+		'folder': '../images/galeryThumb',
+		'auto': false, // use for auto upload
+		'multi': true,
+		'queueSizeLimit': 1,
+		'onQueueFull': function(event, queueSizeLimit) 
+		{
+			alert("Please don't put anymore files in me! You can upload " + queueSizeLimit + " files at once");
+			return false;
+		},
+		'onComplete': function(event, ID, fileObj, response, data) 
+		{
+			var url_topPicture=fileObj.filePath;
+			<!--send the image url to the script that insert that url into the "left_sideBar" table-->
+			$.post("../function/insertContentTop.php", {data: url_topPicture });
+			$("#uploadButton1").css('display','none');
 		}
 	});
 
-
-	
 });
+
+function calc()
+	{
+
+	  if(document.getElementById('checkboxT').checked)
+	
+		    $("#upload3").css('display','block');
+			$("#file_upload2").uploadify
+			({
+				'uploader': 'uploadifyit/uploadify.swf',
+				'script': 'uploadifyit/uploadify.php',
+				'cancelImg': 'uploadifyit/cancel.png',
+				'folder': '../images/galeryThumb',
+				'auto': false, // use for auto upload
+				'multi': true,
+				'queueSizeLimit': 1,
+				'onQueueFull': function(event, queueSizeLimit) 
+				{
+					alert("Please don't put anymore files in me! You can upload " + queueSizeLimit + " files at once");
+					return false;
+				},
+				'onComplete': function(event, ID, fileObj, response, data) 
+				{
+				//	var url_topPicture=fileObj.filePath;
+					<!--send the image url to the script that insert that url into the "left_sideBar" table-->
+				//	$.post("../function/insertContentTop.php", {data: url_topPicture });
+				//	$("#uploadButton1").css('display','none');
+				}
+			});
+		
+	}
 
 </script>
 
-
 </body>
 </html>
+
+
+
+

@@ -12,7 +12,10 @@
 		  {
 				 $slikaSideBar=$row['sidebarURL'];
 				 $id=$row['id'];
+				 if($id>=4)
+				 {
 				 echo "<a href=javascript: void(0);><img onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+				 }
 		  }
 		mysql_close($con);
 	?>
@@ -46,7 +49,7 @@
 					<!--galery thumb picture-->
 					if(differentPictures[i].split('*')[1].split("%")[0]=="true")
 					{
-						$("#contentBottom").append("<a href=javascript: void(0);><img onclick='galeryClick("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");
+						$("#contentBottom").append("<a href=javascript: void(0);><img style='margin-left:10px' onclick='galeryClick("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");
 					}
 				}
 			});

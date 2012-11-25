@@ -79,69 +79,27 @@ table {
 	width:821px;
 	float:left;
 }
+#container
+{
+float:left;
+}
 /*~master*/
 
 /*index*/
-#logo
+.logo
 {
-	background:url(images/feydom_logo.png) no-repeat;
 	float:left;
 	height:205px;
 	width:411px;
 }
-#imgup_1
+.imgup
 {
-	background:url(images/product.png) no-repeat;
-	float:left;
-	width:205px;
-	height:205px;
-}
-#imgup_2
-{
-	background:url(images/about_us.png) no-repeat;
-	float:left;
-	width:205px;
-	height:205px;
-}
-#imgup_3
-{
-	background:url(images/contact.png) no-repeat;
 	float:left;
 	width:205px;
 	height:205px;
 }
 .imgside
 {
-	width:205px;
-	height:205px;
-}
-#imgside_1
-{
-	background:url(images/events.png) no-repeat;
-	width:205px;
-	height:205px;
-}
-#imgside_2
-{
-	background:url(images/design_studio.png) no-repeat;
-	width:205px;
-	height:205px;
-}
-#imgside_3
-{
-	background:url(images/show_room.png) no-repeat;
-	width:205px;
-	height:205px;
-}
-#imgside_4
-{
-	background:url(images/factory.png) no-repeat;
-	width:205px;
-	height:205px;
-}
-#imgside_5
-{
-	background:url(images/feydom_catalog.png) no-repeat;
 	width:205px;
 	height:205px;
 }
