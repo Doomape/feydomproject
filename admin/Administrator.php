@@ -154,7 +154,9 @@ width:128px;
 			<div style="clear:both"></div>
 				<div id="menu" class="uploadform" style="display:none; float:right">
 					<p class="titletext">Додавање на слики за категорија
-					<input type="checkbox" id="checkboxT" name="checkboxT" onclick="calc();"/></p>
+					<input type="checkbox" id="checkboxT" name="checkboxT" onclick="checkBox1();"/></p>
+					<p class="titletext">Додавање на слики за галерија
+					<input type="checkbox" id="checkboxT1" name="checkboxT1" onclick="checkBox2();"/></p>
 				</div>
 				<div style="clear:both"></div>
 				<div id="upload3" class="uploadform" style="display:none; float: right;">
@@ -220,12 +222,11 @@ $(document).ready(function() {
 
 });
 
-function calc()
+function checkBox1()
 	{
-
-	  if(document.getElementById('checkboxT').checked)
-	
-		    $("#upload3").css('display','block');
+       					
+	    if(document.getElementById('checkboxT').checked)
+	    {
 			$("#file_upload2").uploadify
 			({
 				'uploader': 'uploadifyit/uploadify.swf',
@@ -248,7 +249,52 @@ function calc()
 				//	$("#uploadButton1").css('display','none');
 				}
 			});
-		
+		  $("#upload3").css('display','block');
+		}
+	    if(!(document.getElementById('checkboxT').checked))
+	    {
+	    $("#upload3").empty();
+		  $("#upload3").append("<form id='form3' name='form3' action=''><input type='file' id='file_upload2' name='file_upload2'/><br/><a id='uploadButton2' href='javascript:$('#file_upload2').uploadifyUpload();'>Додади</a></form>");
+		  $("#upload3").css('display','none');
+		}
+	}
+	
+	function checkBox2()
+	{
+       					
+	    if(document.getElementById('checkboxT1').checked)
+	    {
+			$("#file_upload2").uploadify
+			({
+				'uploader': 'uploadifyit/uploadify.swf',
+				'script': 'uploadifyit/uploadify.php',
+				'cancelImg': 'uploadifyit/cancel.png',
+				'folder': '../images/galeryThumb',
+				'auto': false, // use for auto upload
+				'multi': true,
+				'queueSizeLimit': 10,
+				'onQueueFull': function(event, queueSizeLimit) 
+				{
+					alert("Please don't put anymore files in me! You can upload " + queueSizeLimit + " files at once");
+					return false;
+				},
+				'onComplete': function(event, ID, fileObj, response, data) 
+				{
+					var url_BottomGaleryPicture=fileObj.filePath;
+					//alert(url_BottomGaleryPicture);
+					<!--send the image url to the script that insert that url into the "left_sideBar" table-->
+					$.post("../function/insertBottomGaleryImage.php", {data: url_BottomGaleryPicture });
+					$("#uploadButton2").css('display','none');
+				}
+			});
+		  $("#upload3").css('display','block');
+		}
+	    if(!(document.getElementById('checkboxT1').checked))
+	    {
+	    $("#upload3").empty();
+		  $("#upload3").append("<form id='form3' name='form3' action=''><input type='file' id='file_upload2' name='file_upload2'/><br/><a id='uploadButton2' href='javascript:$('#file_upload2').uploadifyUpload();'>Додади</a></form>");
+		  $("#upload3").css('display','none');
+		}
 	}
 function show_add()
 {
