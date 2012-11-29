@@ -27,28 +27,40 @@
 		    $("#contentBottom").css('display', 'block');
 			<!--content top image-->
 			$.post("function/contentTopImage.php", {data: e }, 
-			function(imageTop)
-			{    
-				$("#contentTop").append("<img  style='max-width: 546px;float:left' src='"+imageTop+"'/>");
-				$("#contentTop").append("");
-				
+			function(image_and_text)
+			{ 
+			    var pictire_and_text=image_and_text.split('#');
+				for(i=1; i<=pictire_and_text.length-1; i++)
+				{
+				$("#imageTop").append("<img  style='max-width: 546px; float:left' src='"+pictire_and_text[i].split('*')[0]+"'/>");
+				$("#textTop").append("<p>"+pictire_and_text[i].split('*')[1]+"</p> ");	
+				}
 			});
-			$("#contentTop").empty();
+			$("#imageTop").empty();
+			$("#textTop").empty();
 			
+			
+			
+			
+		
+			 
 			<!--content bottom images-->
 			$.post("function/contentBottomImage.php", {data: e }, 
 			function(imageBottom)
 			{ 
+			//	alert(imageBottom);
 				var differentPictures=imageBottom.split('#');
+			//	alert(differentPictures);
 				for(i=1; i<=differentPictures.length-1; i++)
 				{
+				alert(differentPictures[i].split('*')[1].split("%")[0]);
 					<!--normal picture-->
-					if(differentPictures[i].split('*')[1].split("%")[0]=="false")
+					if(differentPictures[i].split('*')[1].split("%")[0]=="normal")
 					{
 						$("#contentBottom").append("<img style='width:205px;' src='"+differentPictures[i].split('*')[0]+"'/>");
 					}
 					<!--galery thumb picture-->
-					if(differentPictures[i].split('*')[1].split("%")[0]=="true")
+					if(differentPictures[i].split('*')[1].split("%")[0]=="galery")
 					{
 						$("#contentBottom").append("<a href=javascript: void(0);><img style='margin-left:10px' onclick='galeryClick("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");
 					}
@@ -56,6 +68,37 @@
 			});
 			$("#contentBottom").empty();
 		 }
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 		 <!--enter into galery-->
 		 function galeryClick(e)
 		 {
