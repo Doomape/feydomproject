@@ -38,10 +38,10 @@
 			$.post("function/contentTopImage.php", {data: e }, 
 			function(imageTop)
 			{    
-				$("#contentTop").append("<img src='"+imageTop+"'/>");
+				$("#imageTop").append("<img src='"+imageTop+"'/>");
 				
 			});
-			$("#contentTop").empty();
+			$("#imageTop").empty();
 			
 			<!--content bottom images-->
 			$.post("function/contentBottomImage.php", {data: e }, 
