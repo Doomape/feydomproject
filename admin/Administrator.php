@@ -1,9 +1,8 @@
-﻿ 
 <?php
-// echo $_SERVER['DOCUMENT_ROOT'];
+session_start();
+/* echo $_SERVER['DOCUMENT_ROOT'];*/
 
 /*checking if there is something in the session if not redirect to login,otherwise get in administrator.php*/
-session_start();
 
 if (!isset( $_SESSION['myusername']) )
 {
@@ -20,7 +19,7 @@ case 'logout' :
     break; 
 default : 
    
-} 
+}
 function logout()
 {
 	session_start();
@@ -34,6 +33,7 @@ function logout()
 <html>
 
 <head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="../style.css">
 <link rel="stylesheet" href="uploadifyit/uploadify.css" type="text/css" />
 <script type="text/javascript" src="uploadifyit/jquery-1.4.2.min.js"></script>
@@ -105,8 +105,8 @@ width:128px;
 </head>
 
 <body >
-<div id="addtext">Додавање</div>
-<div id="edittext">Измена</div>
+<div id="addtext">ИЗМЕНА</div>
+<div id="edittext">ДОДАВАЊЕ</div>
 <div onclick="show_add();" id="add"></div>
 <div onclick="show_edit();" id="edit"></div>
 
@@ -141,14 +141,14 @@ width:128px;
 				<p class="titletext">Додавање на слика во левата колона</p>
 				<form id="form1" name="form1" action="">
 					<input type="file" id="file_upload" name="file_upload" /><br />
-					<a id="uploadButton" href="javascript:$('#file_upload').uploadifyUpload();">Додади</a>
+					<a id="uploadButton" href="javascript:$('#file_upload').uploadifyUpload();">??????</a>
 				</form>
 			</div>
 			<div id="upload2" class="uploadform" style="display:none">
 				<p class="titletext">Додавање на главна слика</p>
 				<form id="form2" name="form2" action="">
 				<input type="file" id="file_upload1" name="file_upload1"/><br/>
-				<a id="uploadButton1" href="javascript:$('#file_upload1').uploadifyUpload();">Додади</a>
+				<a id="uploadButton1" href="javascript:$('#file_upload1').uploadifyUpload();">??????</a>
 				</form>
 			</div>
 			<div style="clear:both"></div>
@@ -255,7 +255,7 @@ function checkBox1()
 	    if(!(document.getElementById('checkboxT').checked))
 	    {
 	    $("#upload3").empty();
-		  $("#upload3").append("<form id='form3' name='form3' action=''><input type='file' id='file_upload2' name='file_upload2'/><br/><a id='uploadButton2' href='javascript:$('#file_upload2').uploadifyUpload();'>Додади</a></form>");
+		  $("#upload3").append("<form id='form3' name='form3' action=''><input type='file' id='file_upload2' name='file_upload2'/><br/><a id='uploadButton2' href='javascript:$('#file_upload2').uploadifyUpload();'>??????</a></form>");
 		  $("#upload3").css('display','none');
 		}
 	}
@@ -293,7 +293,7 @@ function checkBox1()
 	    if(!(document.getElementById('checkboxT1').checked))
 	    {
 	    $("#upload3").empty();
-		  $("#upload3").append("<form id='form3' name='form3' action=''><input type='file' id='file_upload2' name='file_upload2'/><br/><a id='uploadButton2' href='javascript:$('#file_upload2').uploadifyUpload();'>Додади</a></form>");
+		  $("#upload3").append("<form id='form3' name='form3' action=''><input type='file' id='file_upload2' name='file_upload2'/><br/><a id='uploadButton2' href='javascript:$('#file_upload2').uploadifyUpload();'>??????</a></form>");
 		  $("#upload3").css('display','none');
 		}
 	}
