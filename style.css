@@ -25,6 +25,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	color: #333;
+	background: url(//s.ytimg.com/yts/img/refresh/body_noise-vfl_60-qt.png);
+	background-color: #EBEBEB;
+	background-repeat: repeat;
 }
 ol, ul {
 	list-style: none;

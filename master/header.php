@@ -20,7 +20,10 @@
 				}
 				if($id>0&&$id<4)
 				{
-				 echo "<a href=javascript: void(0);><img onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+					if($row['isContact']!="true")
+					echo "<a href=javascript: void(0);><img onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+					else
+					echo "<a href=javascript: void(0);><img id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>";
 				}			 
 		  }
 		mysql_close($con);
