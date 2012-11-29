@@ -7,15 +7,14 @@
 			 }        
 			mysql_select_db("feydom", $con);
 			$slikaBottom="";
-			$i=0;
-			$result = mysql_query("SELECT * FROM main_content where main_content.id='".$itemvalue."' ");
+			$result = mysql_query("SELECT * FROM main_content where main_content.id='4' ");
 			while($row = mysql_fetch_array($result))
 			  {
-					 $slikaB=$row['contentBottomURL'];
-					 $checkG=$row['galeryCheck'];
+					 $slikaB=$row['maincontentURL'];
+					 $checkG=$row['imageCheck'];
 					 $idMC=$row['idmc'];
-					 $slikaBottom=$slikaBottom."#". $slikaB."*". $checkG."%".$idMC;
-					 $i++;
+					 $imageText=$row['imageText'];
+					 $slikaBottom=$slikaBottom."#". $slikaB."*". $checkG."%".$idMC."&".$imageText;
 			  }
 		mysql_close($con);
 	echo $slikaBottom;

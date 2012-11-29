@@ -7,11 +7,18 @@
 			 }        
 			mysql_select_db("feydom", $con);
 			$slikaTop="";
-			$result = mysql_query("SELECT contentTopURL FROM left_sidebar where id='".$itemvalue."' ");
+			$imageText="";
+			$image_text="";
+			$result = mysql_query("SELECT maincontentURL, imageCheck, imageText FROM main_content where id='".$itemvalue."' ");
 			while($row = mysql_fetch_array($result))
 			  {
-					 $slikaTop=$row['contentTopURL'];
+					if($row['imageCheck']=="top")
+					{
+					 $slikaTop=$row['maincontentURL'];
+					 $imageText=$row['imageText'];
+					 $image_text=$image_text."#". $slikaTop."*". $imageText;
+					 }
 			  }
 		mysql_close($con);
-	echo $slikaTop;
+	echo $image_text;
 ?>
