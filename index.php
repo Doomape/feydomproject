@@ -20,7 +20,11 @@
         <?php include 'master/left-side.php'; ?>
         <!--main content-->
         <div id="maincontent">
-			<div id="contentTop">
+			<div  id="contentTop" style="float:left; min-height:410px;">
+				<!--<img  style='max-width: 546px;float:left' src='http://localhost/feydomproject/images/17092011866.jpg'/>-->
+				<div id="imageTop" style="float:left; max-width: 546px; width: 546px; min-height: 410px; "></div>
+				<div id="textTop" style="float:left; min-height: 410px; max-width:275px; width:275px;">
+				</div>	
 			</div>
 			<div id="contentBottom">
 			</div>

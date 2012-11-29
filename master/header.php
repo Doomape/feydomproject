@@ -50,12 +50,12 @@
 					<!--normal picture-->
 					if(differentPictures[i].split('*')[1].split("%")[0]=="false")
 					{
-						$("#contentBottom").append("<img  src='"+differentPictures[i].split('*')[0]+"'/>");
+						$("#contentBottom").append("<img style='width:205px;'src='"+differentPictures[i].split('*')[0]+"'/>");
 					}
 					<!--galery thumb picture-->
 					if(differentPictures[i].split('*')[1].split("%")[0]=="true")
 					{
-						$("#contentBottom").append("<a href=javascript: void(0);><img style='margin-right:10px;margin-bottom:10px;'onclick='headergaleryClick("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'></img></a>");
+						$("#contentBottom").append("<a href=javascript: void(0);><img style='width: 205px;' style='margin-right:10px;margin-bottom:10px;'onclick='headergaleryClick("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'></img></a>");
 					}
 				}
 			});
@@ -77,12 +77,12 @@
 					{
 						$("#contentTop").css('display', 'block');
 						$("#contentTop").append("<img src='"+differentPictures[i].split('*')[0]+"'/>");
-						$("#contentBottom").append("<a href=javascript: void(0);><img onclick='headershowOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");	
+						$("#contentBottom").append("<a href=javascript: void(0);><img  style='width: 205px;' onclick='headershowOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");	
 					}
 					if(differentPictures[i].split('*')[1].split("%")[0]=="false")
 					{  
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href=javascript: void(0);><img onclick='headershowOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");
+						$("#contentBottom").append("<a href=javascript: void(0);><img style='width: 205px;' onclick='headershowOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");
 					}
 				}
 			});

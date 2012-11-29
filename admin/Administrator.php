@@ -202,7 +202,7 @@ $(document).ready(function() {
 		'uploader': 'uploadifyit/uploadify.swf',
 		'script': 'uploadifyit/uploadify.php',
 		'cancelImg': 'uploadifyit/cancel.png',
-		'folder': '../images/galeryThumb',
+		'folder': '../images/sidebarImages',
 		'auto': false, // use for auto upload
 		'multi': true,
 		'queueSizeLimit': 1,
@@ -235,7 +235,7 @@ function checkBox1()
 				'folder': '../images/galeryThumb',
 				'auto': false, // use for auto upload
 				'multi': true,
-				'queueSizeLimit': 1,
+				'queueSizeLimit': 100,
 				'onQueueFull': function(event, queueSizeLimit) 
 				{
 					alert("Please don't put anymore files in me! You can upload " + queueSizeLimit + " files at once");
@@ -243,10 +243,11 @@ function checkBox1()
 				},
 				'onComplete': function(event, ID, fileObj, response, data) 
 				{
-				//	var url_topPicture=fileObj.filePath;
+					var url_BottomCategoryPicture=fileObj.filePath;
+					//alert(url_BottomGaleryPicture);
 					<!--send the image url to the script that insert that url into the "left_sideBar" table-->
-				//	$.post("../function/insertContentTop.php", {data: url_topPicture });
-				//	$("#uploadButton1").css('display','none');
+					$.post("../function/insertBottomCategoryImage.php", {data: url_BottomCategoryPicture });
+					$("#uploadButton2").css('display','none');
 				}
 			});
 		  $("#upload3").css('display','block');
@@ -272,7 +273,7 @@ function checkBox1()
 				'folder': '../images/galeryThumb',
 				'auto': false, // use for auto upload
 				'multi': true,
-				'queueSizeLimit': 10,
+				'queueSizeLimit': 100,
 				'onQueueFull': function(event, queueSizeLimit) 
 				{
 					alert("Please don't put anymore files in me! You can upload " + queueSizeLimit + " files at once");

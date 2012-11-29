@@ -29,7 +29,8 @@
 			$.post("function/contentTopImage.php", {data: e }, 
 			function(imageTop)
 			{    
-				$("#contentTop").append("<img src='"+imageTop+"'/>");
+				$("#contentTop").append("<img  style='max-width: 546px;float:left' src='"+imageTop+"'/>");
+				$("#contentTop").append("");
 				
 			});
 			$("#contentTop").empty();
@@ -44,7 +45,7 @@
 					<!--normal picture-->
 					if(differentPictures[i].split('*')[1].split("%")[0]=="false")
 					{
-						$("#contentBottom").append("<img src='"+differentPictures[i].split('*')[0]+"'/>");
+						$("#contentBottom").append("<img style='width:205px;' src='"+differentPictures[i].split('*')[0]+"'/>");
 					}
 					<!--galery thumb picture-->
 					if(differentPictures[i].split('*')[1].split("%")[0]=="true")
