@@ -21,10 +21,19 @@
 	?>
 
 	<script type="text/javascript">
+	
 		function sideClick(e)
 		{
+		   	$("#imageTop").empty();
+			$("#textTop").empty();
 			$("#contentTop").css('display', 'block');
 		    $("#contentBottom").css('display', 'block');
+			$("#imageTop").css('max-width','546px');
+			$("#imageTop").css('width','546px');
+			//	min-height: 410px; max-width:275px; width:275px;
+			$("#textTop").css('max-width','275px');
+			$("#textTop").css('min-height','410px');
+			$("#textTop").css('width','275px');
 			<!--content top image-->
 			$.post("function/contentTopImage.php", {data: e }, 
 			function(image_and_text)
@@ -36,11 +45,10 @@
 				$("#textTop").append("<p>"+pictire_and_text[i].split('*')[1]+"</p> ");	
 				}
 			});
-			$("#imageTop").empty();
-			$("#textTop").empty();
+
 			
 			
-			
+
 			
 		
 			 
@@ -48,61 +56,65 @@
 			$.post("function/contentBottomImage.php", {data: e }, 
 			function(imageBottom)
 			{ 
-			//	alert(imageBottom);
+		//	alert(imageBottom);
+				$("#contentBottom").empty();
 				var differentPictures=imageBottom.split('#');
-			//	alert(differentPictures);
 				for(i=1; i<=differentPictures.length-1; i++)
-				{
-				alert(differentPictures[i].split('*')[1].split("%")[0]);
-					<!--normal picture-->
-					if(differentPictures[i].split('*')[1].split("%")[0]=="normal")
+				{				
+			//	alert(differentPictures[i].split('*')[1].split("%")[1].split("&")[0]);
+			//alert(differentPictures[i].split('*')[1].split("%")[1]);
+				var idmc=differentPictures[i].split('*')[1].split("%")[1].split("&")[0];
+				var maincontentURL=differentPictures[i].split('*')[0];
+				var imageCheck=differentPictures[i].split('*')[1].split("%")[0];
+					<!--top picture-->
+					if(imageCheck=="top")
 					{
-						$("#contentBottom").append("<img style='width:205px;' src='"+differentPictures[i].split('*')[0]+"'/>");
+						//debugger;
+					    $("#contentBottom").append("<a href=javascript: void(0);><div onclick='putOnTop("+idmc+")' id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
+				    }
+					//	$("#textTop").append("<p>"+differentPictures[i].split('*')[1].split("%")[1].split("&")[1].split("@")[0]+"</p> ");	
+					
+					<!--normal picture-->
+					if(imageCheck=="normal")
+					{
+					    $("#contentBottom").append("<div id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div>");
 					}
 					<!--galery thumb picture-->
-					if(differentPictures[i].split('*')[1].split("%")[0]=="galery")
+					if(imageCheck=="galery")
 					{
-						$("#contentBottom").append("<a href=javascript: void(0);><img style='margin-left:10px' onclick='galeryClick("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");
-					}
-				}
+						$("#contentBottom").append("<a href=javascript: void(0);><div onclick='galeryClick("+idmc+")'  id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
+					}			
+				}					
 			});
-			$("#contentBottom").empty();
+
 		 }
 		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
+		 function putOnTop(e)
+		 {
+			$("#imageTop").empty();
+			$("#textTop").empty();
+			$.post("function/showTopImage.php", {data: e }, 
+			function(topImage)
+			{
+			//	alert(topImage.split("#")[1].split("%")[0]);
+				var topPicture=topImage.split("#")[1].split("%")[0];
+				var topText=topImage.split("#")[1].split("%")[1];
+				$("#imageTop").append("<img style='max-width: 546px;' src='"+topPicture+"'/>");
+				$("#textTop").append("<p>"+topText+"</p>");
+			});
+		 }
+
 		 
 		 
 		 
 		 <!--enter into galery-->
 		 function galeryClick(e)
 		 {
-		 	$("#contentTop").empty();
+		 	$("#imageTop").empty();
+		//	min-height: 410px; max-width:275px; width:275px;
+			$("#textTop").css('max-width','0px');
+			$("#textTop").css('min-height','0px');
+			$("#textTop").css('width','0px');
 		    $("#contentBottom").empty();
 			
 			$.post("function/galery.php", {data: e }, 
@@ -110,17 +122,20 @@
 			{
 				var differentPictures=galeryImages.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
-				{
+				{// alert(differentPictures[i].split('*')[1].split("%")[1]);
 					if(differentPictures[i].split('*')[1].split("%")[0]=="true")
 					{
-						$("#contentTop").css('display', 'block');
-						$("#contentTop").append("<img src='"+differentPictures[i].split('*')[0]+"'/>");
-						$("#contentBottom").append("<a href=javascript: void(0);><img onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");	
+						$("#imageTop").css('display', 'block');
+						$("#imageTop").css('max-width','821px');
+						$("#imageTop").css('width','821px');
+						$("#imageTop").css('min-height','410px');
+						$("#imageTop").append("<img style='max-height:410px'src='"+differentPictures[i].split('*')[0]+"'/>");
+						$("#contentBottom").append("<a href=javascript: void(0);><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
 					}
 					if(differentPictures[i].split('*')[1].split("%")[0]=="false")
 					{  
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href=javascript: void(0);><img onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></a>");
+						$("#contentBottom").append("<a href=javascript: void(0);><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></div></a>");
 					}
 				}
 			});
@@ -128,13 +143,35 @@
 		 <!--change galery image-->
 		  function showOnTop(e)
 		 {
-			$("#contentTop").empty();
+			$("#imageTop").empty();
 			$.post("function/galeryTopImage.php", {data: e }, 
 			function(topImage)
 			{
-				$("#contentTop").append("<img src='"+topImage+"'/>");
+						$("#imageTop").css('display', 'block');
+						$("#imageTop").css('max-width','821px');
+						$("#imageTop").css('width','821px');
+						$("#imageTop").css('min-height','410px');
+				$("#imageTop").append("<img style='max-height:410px' src='"+topImage+"'/>");
 			});
-		 }
+		 } 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+
+		 
+		 
 	</script>
 	
 </div>

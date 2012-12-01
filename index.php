@@ -22,7 +22,6 @@
         <div id="maincontent">
 			<div  id="contentTop">
 				<div id="imageTop" style="float:left; max-width: 546px; width: 546px; min-height: 410px;"></div>
-
 				<div id="textTop" style="float:left; min-height: 410px; max-width:275px; width:275px;">
 					<div id="contact_form" style="display:none">
 						<section class="body">
@@ -43,7 +42,6 @@
 				</div> 
 		    </div>
 		   <div style="clear:both"></div>
-
 			<div id="contentBottom">
 			</div>
         </div>
