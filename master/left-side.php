@@ -46,12 +46,6 @@
 				}
 			});
 
-			
-			
-
-			
-		
-			 
 			<!--content bottom images-->
 			$.post("function/contentBottomImage.php", {data: e }, 
 			function(imageBottom)
@@ -104,9 +98,6 @@
 			});
 		 }
 
-		 
-		 
-		 
 		 <!--enter into galery-->
 		 function galeryClick(e)
 		 {
@@ -154,25 +145,7 @@
 						$("#imageTop").css('min-height','410px');
 				$("#imageTop").append("<img style='max-height:410px' src='"+topImage+"'/>");
 			});
-		 } 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-
-		 
-		 
+		 }  
 	</script>
 	
 </div>
