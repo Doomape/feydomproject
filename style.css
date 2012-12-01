@@ -121,7 +121,7 @@ h1 {
 }
 
 form {
-	width:459px;
+	width:100%;
 	margin:0 auto;
 }
 
@@ -132,8 +132,8 @@ label {
 }
 
 input, textarea {
-	width:439px;
-	height:27px;
+	width:253px;
+	height:20px;
 	background:#efefef;
 	border-radius:5px;
 	-moz-border-radius:5px;
@@ -156,16 +156,21 @@ textarea {
 }
 
 #submit {
-	background:url(images/submit.jpg);
-	width:127px;
-	height:38px;
-	text-indent:-9999px;
-	border:none;
-	margin-top:20px;
-	cursor:pointer;
+	background: url(images/submit.png);
+	width: 122px;
+	height: 42px;
+	border: none;
+	cursor: pointer;
+	bottom: -60px;
+	left: 0px;
+	position: absolute;
 }
 
 	#submit:hover {
-		opacity:0.9;
+		opacity:0.8;
 	}
+#contact_form
+{
+	position:relative;
+}
 /*~index*/

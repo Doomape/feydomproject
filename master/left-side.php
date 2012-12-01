@@ -111,6 +111,7 @@
 		 function galeryClick(e)
 		 {
 		 	$("#imageTop").empty();
+			$("#textTop").empty();
 		//	min-height: 410px; max-width:275px; width:275px;
 			$("#textTop").css('max-width','0px');
 			$("#textTop").css('min-height','0px');
