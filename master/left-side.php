@@ -46,12 +46,6 @@
 				}
 			});
 
-			
-			
-
-			
-		
-			 
 			<!--content bottom images-->
 			$.post("function/contentBottomImage.php", {data: e }, 
 			function(imageBottom)
@@ -104,13 +98,11 @@
 			});
 		 }
 
-		 
-		 
-		 
 		 <!--enter into galery-->
 		 function galeryClick(e)
 		 {
 		 	$("#imageTop").empty();
+			$("#textTop").empty();
 		//	min-height: 410px; max-width:275px; width:275px;
 			$("#textTop").css('max-width','0px');
 			$("#textTop").css('min-height','0px');
@@ -153,25 +145,7 @@
 						$("#imageTop").css('min-height','410px');
 				$("#imageTop").append("<img style='max-height:410px' src='"+topImage+"'/>");
 			});
-		 } 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-
-		 
-		 
+		 }  
 	</script>
 	
 </div>
