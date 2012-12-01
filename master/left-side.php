@@ -14,7 +14,7 @@
 				 $id=$row['id'];
 				 if($id>=4)
 				 {
-				 echo "<a href=javascript: void(0);><img onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+				 echo "<a href='javascript: void(0);'><img id="."img_".$id." onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
 				 }
 		  }
 		mysql_close($con);

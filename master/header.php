@@ -13,17 +13,22 @@
 		  {
 		  		 $slikaSideBar=$row['sidebarURL'];
 				 $id=$row['id'];
+				 $isStartPage=$row['isStartPage'];
 				if($id==0)
 				{
-
-				 echo "<a href=javascript: void(0);><img onclick='headerClick(".$id.")' class='logo' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+				 echo "<a id=".$id." href=javascript: void(0);><img id="."img_".$id." onclick='headerClick(".$id.")' class='logo' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
 				}
 				if($id>0&&$id<4)
 				{
 					if($row['isContact']!="true")
-					echo "<a href=javascript: void(0);><img onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+					{
+						if($isStartPage=="true")
+						echo "<a href='javascript: void(0);'><img id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+						else
+						echo "<a href='javascript: void(0)';><img id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+					}
 					else
-					echo "<a href=javascript: void(0);><img id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>";
+					echo "<a href='javascript: void(0)';><img id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>";
 				}			 
 		  }
 		mysql_close($con);

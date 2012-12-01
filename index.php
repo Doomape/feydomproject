@@ -37,6 +37,12 @@
 <?php include 'master/footer.php'; ?>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+	
+  $('#start').trigger('click');
+});
+
 $("#contact").click(function(event){
     $("#textTop").empty();
 	$("#textTop").append("<div id='contact_form'><section class='body'><form method='post' action='/function/sendmail.php'><label>Name</label><input name='name' placeholder='Type Here'><label>Email</label><input name='email' type='email' placeholder='Type Here'><label>Message</label><textarea name='message' placeholder='Type Here'></textarea><button type='submit' id='submit' name='submit' value='Submit'/></form></section></div>");
