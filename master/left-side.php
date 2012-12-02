@@ -58,7 +58,7 @@
 				for(i=1; i<=pictire_and_text.length-1; i++)
 				{
 				$("#imageTop").append("<img  style='max-width: 546px; float:left' src='"+pictire_and_text[i].split('*')[0]+"'/>");
-				$("#textTop").append("<p>"+pictire_and_text[i].split('*')[1]+"</p> ");	
+				$("#textTop").append("<p style='margin:23px'>"+pictire_and_text[i].split('*')[1]+"</p> ");	
 				}
 			});
 

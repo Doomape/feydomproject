@@ -22,7 +22,7 @@
         <div id="maincontent">
 			<div  id="contentTop">
 				<div id="imageTop" style="float:left; max-width: 546px; width: 546px; min-height: 410px;"></div>
-				<div id="textTop" style="float:left; min-height: 410px; max-width:275px; width:275px;">
+				<div id="textTop" style="float: left;min-height: 404px;max-width: 275px;width: 275px;max-height: 404px;overflow: overlay;">
 					
 				</div> 
 		    </div>
