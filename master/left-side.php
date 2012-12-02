@@ -5,16 +5,31 @@
 		if (!$con)
 		  {
 		  die('Could not connect: ' . mysql_error());
-		  }        
-		 mysql_select_db("feydom", $con);
+		  }     
+
+
+		mysql_select_db("feydom", $con);
+		 
 		$result = mysql_query("SELECT * FROM left_sidebar");
 		while($row = mysql_fetch_array($result))
 		  {
 				 $slikaSideBar=$row['sidebarURL'];
 				 $id=$row['id'];
+				 $isStartPage1=$row['isStartPage'];
+				 
 				 if($id>=4)
 				 {
-				 echo "<a href='javascript: void(0);'><img id="."img_".$id." onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+					if($row2['isContact']!="true")
+					{
+						if($isStartPage1=="true")
+							echo "<a href='javascript: void(0);'><img id='start' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>";
+						else
+							echo "<a href='javascript: void(0);'><img id="."img_".$id." onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+					}
+					else
+					{
+						echo "<a href='javascript: void(0);'><img id='contact' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
+					}
 				 }
 		  }
 		mysql_close($con);

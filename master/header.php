@@ -7,22 +7,48 @@
 		  die('Could not connect: ' . mysql_error());
 		  }        
 		 mysql_select_db("feydom", $con);
+		
+		
+		$isStartPage=null;
+		$idstart=null;
+		$slikalogo=null;
+		
+		//get logo image
+		$result1=mysql_query("SELECT sidebarURL FROM left_sidebar where id=0");
+		while($row1 = mysql_fetch_array($result1))
+		{
+			$slikalogo=$row1['sidebarURL'];
+		}
+		
+		//check which page is start page and get that id
 		$result = mysql_query("SELECT * FROM left_sidebar");
-		$i=0;
-		while($row = mysql_fetch_array($result))
+		while($row2 = mysql_fetch_array($result))
+		{
+			$isStartPage=$row2['isStartPage'];
+			if($isStartPage=="true")
+			{
+					$idstart=$row2['id'];
+			}
+		}
+		
+		//print logo
+		if($idstart<=3)
+		echo "<a href=javascript: void(0);><img onclick='headerClick(".$idstart.")' class='logo' style='background:url(" .$slikalogo. ") no-repeat' /></a>"; 
+		else
+		echo "<a href=javascript: void(0);><img onclick='sideClick(".$idstart.")' class='logo' style='background:url(" .$slikalogo. ") no-repeat' /></a>"; 
+		
+		$result2 = mysql_query("SELECT * FROM left_sidebar");
+		while($row2 = mysql_fetch_array($result2))
 		  {
-		  		 $slikaSideBar=$row['sidebarURL'];
-				 $id=$row['id'];
-				 $isStartPage=$row['isStartPage'];
-				if($id==0)
-				{
-				 echo "<a id=".$id." href=javascript: void(0);><img id="."img_".$id." onclick='headerClick(".$id.")' class='logo' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
-				}
+		  		 $slikaSideBar=$row2['sidebarURL'];
+				 $id=$row2['id'];
+				 $isStartPage1=$row2['isStartPage'];
+
 				if($id>0&&$id<4)
 				{
-					if($row['isContact']!="true")
+					if($row2['isContact']!="true")
 					{
-						if($isStartPage=="true")
+						if($isStartPage1=="true")
 						echo "<a href='javascript: void(0);'><img id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
 						else
 						echo "<a href='javascript: void(0)';><img id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' /></a>"; 
