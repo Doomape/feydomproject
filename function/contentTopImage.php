@@ -12,7 +12,7 @@
 			$result = mysql_query("SELECT maincontentURL, imageCheck, imageText,isOnTop FROM main_content where id='".$itemvalue."' ");
 			while($row = mysql_fetch_array($result))
 			  {
-					if($row['imageCheck']=="top" && $row['isOnTop']=="true")
+					if($row['imageCheck']=="top" && $row['isOnTop']=="true" || $row['imageCheck']=="galery" && $row['isOnTop']=="true")
 					{
 					 $slikaTop=$row['maincontentURL'];
 					 $imageText=$row['imageText'];

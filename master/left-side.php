@@ -36,7 +36,7 @@
 	?>
 
 	<script type="text/javascript">
-		var viewer = new PhotoViewer();
+		var viewer = null;
 		
 		function sideClick(e)
 		{
@@ -76,19 +76,19 @@
 					<!--top picture-->
 					if(imageCheck=="top")
 					{
-					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='putOnTop("+idmc+")' id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
+					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='putOnTop("+idmc+")' id='thumbPicture' style='float:left; min-height:205px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
 				    }
 					//	$("#textTop").append("<p>"+differentPictures[i].split('*')[1].split("%")[1].split("&")[1].split("@")[0]+"</p> ");	
 					
 					<!--normal picture-->
 					if(imageCheck=="normal")
 					{
-					    $("#contentBottom").append("<div id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div>");
+					    $("#contentBottom").append("<div id='thumbPicture' style='float:left; min-height:205px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div>");
 					}
 					<!--galery thumb picture-->
 					if(imageCheck=="galery")
 					{
-						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='galeryClick("+idmc+")'  id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
+						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='galeryClick("+idmc+")'  id='thumbPicture' style='float:left; min-height:205px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
 					}			
 				}					
 			});
@@ -113,6 +113,7 @@
 		 <!--enter into galery-->
 		 function galeryClick(e)
 		 {
+			viewer=new PhotoViewer();
 		 	$("#imageTop").empty();
 			$("#textTop").empty();
 		//	min-height: 410px; max-width:275px; width:275px;
@@ -141,14 +142,14 @@
 						if(differentPictures[i].split('*')[1].split("%")[1].split('$')[1]!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:205px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
 						}
 					else
 						{
-						alert(differentPictures[i].split('*')[0]);
+					//	alert(differentPictures[i].split('*')[0]);
 					 viewer.add(differentPictures[i].split('*')[0]);
-					 alert(viewer);
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;'  src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
+			//		 alert(viewer);
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div style='float:left; min-height:205px;max-width:205px;'><img style='max-width:205px;'  src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
 						k++;
 						}
 					}
@@ -157,7 +158,7 @@
 						if(differentPictures[i].split('*')[1].split("%")[1].split('$')[1]!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:205px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
 						}
 						else
 						{
@@ -166,7 +167,7 @@
 					//	alert(viewer);
 						//alert(differentPictures[i].split('*')[1].split("%")[1].split('$')[0]);
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;'  src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div style='float:left; min-height:205px;max-width:205px;'><img style='max-width:205px;'  src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
 							k++;
 						}
 					}

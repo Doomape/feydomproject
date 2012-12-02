@@ -62,6 +62,9 @@
 
 	<script type="text/javascript">
 	
+		var viewer = null;
+			
+
 		function headerClick(e)
 		{
 		   	$("#imageTop").empty();
@@ -107,19 +110,19 @@
 					if(imageCheck=="top")
 					{
 						//debugger;
-					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerPutOnTop("+idmc+")' id='thumbPicture' style='float:left; min-height:210px; width: 205px;'><img style='max-width:205px; max-height:205px;' src='"+maincontentURL+"'/></div></a>");
+					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerPutOnTop("+idmc+")' id='thumbPicture' style='float:left; min-height:205px; width: 205px;'><img style='max-width:205px; max-height:205px;' src='"+maincontentURL+"'/></div></a>");
 				    }
 					//	$("#textTop").append("<p>"+differentPictures[i].split('*')[1].split("%")[1].split("&")[1].split("@")[0]+"</p> ");	
 					
 					<!--normal picture-->
 					if(imageCheck=="normal")
 					{
-					    $("#contentBottom").append("<div id='thumbPicture' style='float:left; min-height:210px;width: 205px;'><img style='max-width:205px; max-height:205px;' src='"+maincontentURL+"'/></div>");
+					    $("#contentBottom").append("<div id='thumbPicture' style='float:left; min-height:205px;width: 205px;'><img style='max-width:205px; max-height:205px;' src='"+maincontentURL+"'/></div>");
 					}
 					<!--galery thumb picture-->
 					if(imageCheck=="galery")
 					{
-						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerGaleryClick("+idmc+")'  id='thumbPicture' style='float:left; min-height:210px;width: 205px;'><img style='max-width:205px; max-height:205px;' src='"+maincontentURL+"'/></div></a>");
+						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerGaleryClick("+idmc+")'  id='thumbPicture' style='float:left; min-height:205px;width: 205px;'><img style='max-width:205px; max-height:205px;' src='"+maincontentURL+"'/></div></a>");
 					}			
 				}					
 			});
@@ -144,6 +147,8 @@
 		 <!--enter into galery-->
 		 function headerGaleryClick(e)
 		 {
+			
+			viewer=new PhotoViewer();
 		 	$("#imageTop").empty();
 			$("#textTop").empty();
 		//	min-height: 410px; max-width:275px; width:275px;
@@ -155,9 +160,12 @@
 			$.post("function/galery.php", {data: e }, 
 			function(galeryImages)
 			{
+				var k=0;
 				var differentPictures=galeryImages.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
-				{// alert(differentPictures[i].split('*')[1].split("%")[1].split('$')[0]);
+				{ //alert(differentPictures[i].split('*')[0]);
+			//	 viewer.add(differentPictures[i].split('*')[0]);
+			//	 alert(viewer);
 					if(differentPictures[i].split('*')[1].split("%")[0]=="true")
 					{
 				//	alert(differentPictures[i].split('*')[0]);
@@ -167,13 +175,17 @@
 						$("#imageTop").css('min-height','410px');
 						$("#imageTop").append("<img style='max-height:410px'src='"+differentPictures[i].split('*')[0]+"'/>");
 						if(differentPictures[i].split('*')[1].split("%")[1].split('$')[1]!="/")
-						{
+						{//alert(differentPictures[i].split('*')[1].split("%")[1].split('$')[0]);
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:205px;max-width:205px;'><img style='max-width:205px;' onclick='headerShowOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
 						}
 					else
 						{
-						$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
+					//	alert(differentPictures[i].split('*')[0]);
+					 viewer.add(differentPictures[i].split('*')[0]);
+				//	 alert(viewer);
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div style='float:left; min-height:205px;max-width:205px;'><img style='max-width:205px;'  src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
+						k++;
 						}
 					}
 					if(differentPictures[i].split('*')[1].split("%")[0]=="false")
@@ -181,12 +193,17 @@
 						if(differentPictures[i].split('*')[1].split("%")[1].split('$')[1]!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:205px;max-width:205px;'><img style='max-width:205px;' onclick='headerShowOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
 						}
 						else
 						{
+					//	alert(differentPictures[i].split('*')[0]);
+						viewer.add(differentPictures[i].split('*')[0]);
+					//	alert(viewer);
+						//alert(differentPictures[i].split('*')[1].split("%")[1].split('$')[0]);
 						$("#contentBottom").css('display', 'block');
-					//	$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='"+differentPictures[i].split('*')[0]+"'/></div></a>");
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div style='float:left; min-height:205px;max-width:205px;'><img style='max-width:205px;'  src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
+							k++;
 						}
 					}
 				}
