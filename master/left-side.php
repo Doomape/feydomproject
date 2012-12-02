@@ -1,13 +1,13 @@
+
 <div id="sidebar">
 
+	<script type="text/javascript" src="Scripts/slide.js"></script>
 	 <?php
 		$con = mysql_connect("localhost","root","");
 		if (!$con)
 		  {
 		  die('Could not connect: ' . mysql_error());
 		  }     
-
-
 		mysql_select_db("feydom", $con);
 		 
 		$result = mysql_query("SELECT * FROM left_sidebar");
@@ -36,7 +36,8 @@
 	?>
 
 	<script type="text/javascript">
-	
+		var viewer = new PhotoViewer();
+		
 		function sideClick(e)
 		{
 		   	$("#imageTop").empty();
@@ -45,10 +46,10 @@
 		    $("#contentBottom").css('display', 'block');
 			$("#imageTop").css('max-width','546px');
 			$("#imageTop").css('width','546px');
-			//	min-height: 410px; max-width:275px; width:275px;
 			$("#textTop").css('max-width','275px');
 			$("#textTop").css('min-height','410px');
 			$("#textTop").css('width','275px');
+			
 			<!--content top image-->
 			$.post("function/contentTopImage.php", {data: e }, 
 			function(image_and_text)
@@ -65,21 +66,17 @@
 			$.post("function/contentBottomImage.php", {data: e }, 
 			function(imageBottom)
 			{ 
-		//	alert(imageBottom);
 				$("#contentBottom").empty();
 				var differentPictures=imageBottom.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
 				{				
-			//	alert(differentPictures[i].split('*')[1].split("%")[1].split("&")[0]);
-			//alert(differentPictures[i].split('*')[1].split("%")[1]);
 				var idmc=differentPictures[i].split('*')[1].split("%")[1].split("&")[0];
 				var maincontentURL=differentPictures[i].split('*')[0];
 				var imageCheck=differentPictures[i].split('*')[1].split("%")[0];
 					<!--top picture-->
 					if(imageCheck=="top")
 					{
-						//debugger;
-					    $("#contentBottom").append("<a href=javascript: void(0);><div onclick='putOnTop("+idmc+")' id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
+					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='putOnTop("+idmc+")' id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
 				    }
 					//	$("#textTop").append("<p>"+differentPictures[i].split('*')[1].split("%")[1].split("&")[1].split("@")[0]+"</p> ");	
 					
@@ -91,7 +88,7 @@
 					<!--galery thumb picture-->
 					if(imageCheck=="galery")
 					{
-						$("#contentBottom").append("<a href=javascript: void(0);><div onclick='galeryClick("+idmc+")'  id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
+						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='galeryClick("+idmc+")'  id='thumbPicture' style='float:left; min-height:210px;'><img style='max-width:205px;' src='"+maincontentURL+"'/></div></a>");
 					}			
 				}					
 			});
@@ -127,22 +124,51 @@
 			$.post("function/galery.php", {data: e }, 
 			function(galeryImages)
 			{
+				var k=0;
 				var differentPictures=galeryImages.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
-				{// alert(differentPictures[i].split('*')[1].split("%")[1]);
+				{ //alert(differentPictures[i].split('*')[0]);
+			//	 viewer.add(differentPictures[i].split('*')[0]);
+			//	 alert(viewer);
 					if(differentPictures[i].split('*')[1].split("%")[0]=="true")
 					{
+				//	alert(differentPictures[i].split('*')[0]);
 						$("#imageTop").css('display', 'block');
 						$("#imageTop").css('max-width','821px');
 						$("#imageTop").css('width','821px');
 						$("#imageTop").css('min-height','410px');
 						$("#imageTop").append("<img style='max-height:410px'src='"+differentPictures[i].split('*')[0]+"'/>");
-						$("#contentBottom").append("<a href=javascript: void(0);><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
+						if(differentPictures[i].split('*')[1].split("%")[1].split('$')[1]!="/")
+						{
+							$("#contentBottom").css('display', 'block');
+							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
+						}
+					else
+						{
+						alert(differentPictures[i].split('*')[0]);
+					 viewer.add(differentPictures[i].split('*')[0]);
+					 alert(viewer);
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;'  src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
+						k++;
+						}
 					}
 					if(differentPictures[i].split('*')[1].split("%")[0]=="false")
 					{  
+						if(differentPictures[i].split('*')[1].split("%")[1].split('$')[1]!="/")
+						{
+							$("#contentBottom").css('display', 'block');
+							$("#contentBottom").append("<a href='javascript: void(0);'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1].split('$')[0]+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
+						}
+						else
+						{
+					//	alert(differentPictures[i].split('*')[0]);
+						viewer.add(differentPictures[i].split('*')[0]);
+					//	alert(viewer);
+						//alert(differentPictures[i].split('*')[1].split("%")[1].split('$')[0]);
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href=javascript: void(0);><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;' onclick='showOnTop("+differentPictures[i].split('*')[1].split("%")[1]+")' src='"+differentPictures[i].split('*')[0]+"'/></div></a>");
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div style='float:left; min-height:210px;max-width:205px;'><img style='max-width:205px;'  src='"+differentPictures[i].split('*')[0]+"'/></div></a>");	
+							k++;
+						}
 					}
 				}
 			});
@@ -152,17 +178,17 @@
 		 {
 			$("#imageTop").empty();
 			$.post("function/galeryTopImage.php", {data: e }, 
-			function(topImage)
+			function(topVideo)
 			{
+		//	alert(topVideo);
 						$("#imageTop").css('display', 'block');
 						$("#imageTop").css('max-width','821px');
 						$("#imageTop").css('width','821px');
 						$("#imageTop").css('min-height','410px');
-				$("#imageTop").append("<img style='max-height:410px' src='"+topImage+"'/>");
+						$("#imageTop").append("<iframe width='821' height='410' src='"+topVideo+"'  frameborder='0' allowfullscreen></iframe>");
 			});
 		 }  
 	</script>
 	
+	
 </div>
-
-

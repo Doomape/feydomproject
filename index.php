@@ -7,7 +7,7 @@
  <script type="text/javascript" src="Scripts/jquery.js"></script>
  <script src="http://code.jquery.com/jquery-latest.js"></script>
  <script type="text/javascript" src="Scripts/jquery-1.4.2.min.js"></script>
-
+<script type="text/javascript" src="Scripts/slide.js"></script>
 <title>Feydom</title>
 </head>
 

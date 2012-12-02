@@ -13,7 +13,8 @@
 					 $slikaB=$row['galeryURL'];
 					 $checkMP=$row['mainPicture'];
 					 $idpic=$row['idpic'];
-					 $galeryImages=$galeryImages."#". $slikaB."*". $checkMP."%".$idpic;
+					 $videoURL=$row['videoURL'];
+					 $galeryImages=$galeryImages."#". $slikaB."*". $checkMP."%".$idpic."$".$videoURL;
 			  }
 		mysql_close($con);
 	echo $galeryImages;
