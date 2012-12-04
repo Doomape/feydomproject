@@ -5,7 +5,7 @@
 <script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
 <link rel="stylesheet" type="text/css" href="style.css">
  <script type="text/javascript" src="Scripts/jquery.js"></script>
- <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
  <script type="text/javascript" src="Scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="Scripts/slide.js"></script>
 <title>Feydom</title>
@@ -26,11 +26,11 @@
 					
 				</div> 
 		    </div>
-		   <div style="clear:both"></div>
+		   
 			<div id="contentBottom">
 			</div>
         </div>
-        <div style="clear:both"></div>
+        
     </div>
 </div>
 <!--footer-->
@@ -38,12 +38,16 @@
 
 <script type="text/javascript">
 
-$(document).ready(function(){
+function startpage(){
+
 	
   $('#start').trigger('click');
-});
+}
+startpage();
 
 $("#contact").click(function(event){
+	$("#textTop").css('height','496px');
+	$("#textTop").css('max-height','496px');
     $("#textTop").empty();
 	$("#textTop").append("<div id='contact_form'><section class='body'><form method='post' action='/function/sendmail.php'><label>Name</label><input name='name' placeholder='Type Here'><label>Email</label><input name='email' type='email' placeholder='Type Here'><label>Message</label><textarea name='message' placeholder='Type Here'></textarea><button type='submit' id='submit' name='submit' value='Submit'/></form></section></div>");
 });
