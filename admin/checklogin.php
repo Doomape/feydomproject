@@ -2,9 +2,9 @@
 
 ob_start();
 $host="localhost"; // Host name 
-$username="root"; // Mysql username 
-$password=""; // Mysql password 
-$db_name="feydom"; // Database name 
+$username="alienper_root"; // Mysql username 
+$password="kokikoki"; // Mysql password 
+$db_name="alienper_feydom"; // Database name 
 $tbl_name="members"; // Table name 
 
 // Connect to server and select databse.

@@ -2,12 +2,12 @@
 
 	<script type="text/javascript" src="Scripts/slide.js"></script>
 	 <?php
-		$con = mysql_connect("localhost","root","");
+		$con = mysql_connect("localhost","alienper_root","kokikoki");
 		if (!$con)
 		  {
 		  die('Could not connect: ' . mysql_error());
 		  }     
-		mysql_select_db("feydom", $con);
+		mysql_select_db("alienper_feydom", $con);
 		 
 		$result = mysql_query("SELECT * FROM left_sidebar");
 		while($row = mysql_fetch_array($result)){
