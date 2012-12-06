@@ -29,7 +29,9 @@ function logout()
 }
 ?>
 
+
 <html>
+
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="../style.css">
@@ -44,12 +46,28 @@ function logout()
 	<div style="width: 1026px;margin: auto;min-height: 100%;">
 		<!--log out button-->
 		<a style="float: right;margin-top: 40px;background: url('../images/logout.png');height: 30px;display: block;width: 30px;" href="?run=logout"></a>
-		<!--add images-->
-       <a href="add.php"><div id="add">Додавање</div></a>
-	   	<!--edit images-->
-	   <a href="edit.php"><div id="edit">Измена </div></a>
+		<!--edit images-->
+		<div style="margin-top:40px;float:left" id="edit_page">
+			<div id="wrap">
+				<div id="main">
+					<!--header-->
+					<?php include '../master/header.php'; ?>
+					<!--left-side-->
+					<?php include '../master/left-side.php'; ?>
+					<!--main content-->
+					<div id="maincontent">
+						<div id="contentTop">
+						</div>
+						<div id="contentBottom">
+						</div>
+					</div>
+					<div style="clear:both"></div>
+				</div>
+			</div>
+		</div>
      </div>
-
+<script type="text/javascript">
+</script>
 </body>
 </html>
 
