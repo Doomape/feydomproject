@@ -52,6 +52,10 @@ function logout()
 					<input type="file" id="file_upload" name="file_upload" /><br />
 					<a id="uploadButton" href="javascript:$('#file_upload').uploadifyUpload();">Додади</a>
 					<a id="removeButton"  onclick='removePicture("left_sidebar")' href="" style="display:none">Избриши</a>
+					
+					<div id="left_checkBox" style="display:none">Почетна страна
+					<input  type="checkbox" id="checkBoxO" name="checkBoxO" onclick="checkBox3();"/></div>
+				
 				</form>
 			</div>
 			<div id="upload2" class="uploadform" style="display:none">
@@ -80,6 +84,7 @@ function logout()
 <script type="text/javascript">
 
 $(document).ready(function() {
+var k="";
 <!--upload image for left side bar-->
 	$("#file_upload").uploadify
 	({
@@ -99,11 +104,14 @@ $(document).ready(function() {
 		{
 			var url_left_sidebar=fileObj.filePath;
 			<!--send the image url to the script that insert that url into the "left_sideBar" table-->
-			$.post("../function/insertLeftSideBar.php", {data: url_left_sidebar });
+			
 			$("#upload2").css('display','block');
 			$("#uploadButton").css('display','none');
 			$("#menu").css('display','block');
 			$("#removeButton").css('display','block');
+			$("#left_checkBox").css('display','block');
+			checkBox3(url_left_sidebar);
+
 		}
 	});
 	<!--when the image is uploaded, it will be showed another image load for the contentTop image--> 
@@ -131,6 +139,21 @@ $(document).ready(function() {
 	});
 
 });
+
+function checkBox3(e)
+{
+	k=e;
+	//alert("koki");
+ if(document.getElementById('checkBoxO').checked)
+{
+alert(k);
+	//$.post("../function/insertLeftSideBar.php", {data: e });
+}
+	 if(!(document.getElementById('checkBoxO').checked))
+{
+	//alert(2);
+} 
+}
 <!--get the name of the table-->
 function removePicture(e)
 {

@@ -51,9 +51,9 @@ function logout()
 			<div id="wrap">
 				<div id="main">
 					<!--header-->
-					<?php include '../master/header.php'; ?>
+					<?php include 'master/admin_header.php'; ?>
 					<!--left-side-->
-					<?php include '../master/left-side.php'; ?>
+					<?php include 'master/admin_left-side.php'; ?>
 					<!--main content-->
 					<div id="maincontent">
 						<div id="contentTop">

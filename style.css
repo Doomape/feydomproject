@@ -103,6 +103,7 @@ display:block;
 	height:205px;
 	width:411px;
 	display:block;
+	position:relative;
 }
 .imgup
 {
@@ -110,12 +111,14 @@ display:block;
 	width:205px;
 	height:205px;
 	display:block;
+	position:relative;
 }
 .imgside
 {
 	width:205px;
 	height:205px;
 	display:block;
+	position:relative;
 }
 .imgtopContent
 {
@@ -130,6 +133,7 @@ display:block;
 	min-height:205px; 
 	min-width: 205px;
 	display:block;
+	position:relative;
 }
 .imgBottom
 {
@@ -150,7 +154,7 @@ h1 {
 	font-size:2.2em;
 	margin:0 auto;
 }
-
+/*
 form {
 	width:100%;
 	margin:0 auto;
@@ -200,6 +204,7 @@ textarea {
 	#submit:hover {
 		opacity:0.8;
 	}
+	*/
 #contact_form
 {
 	position:relative;
