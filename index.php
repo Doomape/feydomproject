@@ -2,12 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
 <link rel="stylesheet" type="text/css" href="style.css">
- <script type="text/javascript" src="Scripts/jquery.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
- <script type="text/javascript" src="Scripts/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="Scripts/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="Scripts/slide.js"></script>
+<script type="text/javascript" src="Scripts/jquery.nicescroll.js"></script>
+
 <title>Feydom</title>
 </head>
 
@@ -37,6 +36,19 @@
 <?php include 'master/footer.php'; ?>
 
 <script type="text/javascript">
+
+var html_scroller = false;
+
+$(document).ready(
+
+  function() { 
+    $("#textTop").niceScroll();
+    html_scroller = $("html").niceScroll();
+    
+  }
+
+);
+
 
 function startpage(){
 

@@ -136,6 +136,8 @@
 				var topText=topImage.split("#")[1].split("%")[1];
 				$("#imageTop").append("<img class='imgtopContent' src='"+topPicture+"'/>");
 				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+                                $("#textTop").getNiceScroll().resize();
+
 			});
 		 }
 
