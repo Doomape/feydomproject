@@ -27,10 +27,10 @@
 					$idstart=$row2['id'];
 			}
 		}
-		
+		$pom="../";
 		//print logo
 		if($idstart<=3)
-		echo "<a href=javascript: void(0);><div onclick='headerClick(".$idstart.")' class='logo' style='background:url(" .$slikalogo. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='file'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /></form></div></a>"; 
+		echo "<a href=javascript: void(0);><div onclick='headerClick(".$idstart.")' class='logo' style='background:url(" .$pom.$slikalogo. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='file'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /></form></div></a>"; 
 		else
 		echo "<a href=javascript: void(0);><div onclick='sideClick(".$idstart.")' class='logo' style='background:url(" .$slikalogo. ") no-repeat' ><input onclick='javascrtipt:alert(1);' class='edit_button' type='button' value='button' name='button'/></div></a>"; 
 		
