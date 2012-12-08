@@ -61,7 +61,7 @@ $("#contact").click(function(event){
 	$("#textTop").css('height','496px');
 	$("#textTop").css('max-height','496px');
     $("#textTop").empty();
-	$("#textTop").append("<div id='contact_form'><section class='body'><form method='post' action='/function/sendmail.php'><label>Name</label><input name='name' placeholder='Type Here'><label>Email</label><input name='email' type='email' placeholder='Type Here'><label>Message</label><textarea name='message' placeholder='Type Here'></textarea><button type='submit' id='submit' name='submit' value='Submit'/></form></section></div>");
+	$("#textTop").append("<div id='contact_form'><section class='body'><form class='from' method='post' action='/function/sendmail.php'><label class='contactLabel'>Name</label><input class='contactInput' name='name' placeholder='Type Here'><label class='contactLabel'>Email</label><input class='contactInput' name='email' type='email' placeholder='Type Here'><label class='contactLabel'>Message</label><textarea class='textarea' name='message' placeholder='Type Here'></textarea><button type='submit' class='submit' name='submit' value='Submit'/></form></section></div>");
 });
 </script>
 </body>
