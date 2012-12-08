@@ -57,8 +57,10 @@
 	?>
 
 	<script type="text/javascript">
-	
+		var imgTxtNext=1;
 		var viewer = null;
+		var imageArray=new Array();
+		var textArray=new Array();
 		function headerClick(e){
 			<!--empty the imageTop and the text container in case they are full-->
 		   	$("#imageTop").empty();
@@ -146,6 +148,8 @@
 			viewer=new PhotoViewer();
 		 	$("#imageTop").empty();
 			$("#textTop").empty();
+			$("#imageTop").append("<img onclick='showNext()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminAdd.png'/>");
+			$("#imageTop").append("<img onclick='showPrevious()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminRemove.png'/>");
 			/*$("#textTop").css('max-width','0px');
 			$("#textTop").css('min-height','0px');
 			$("#textTop").css('width','0px');*/
@@ -164,6 +168,8 @@
 					galeryURL=differentPictures[i].split('*')[0];
 					idpic=differentPictures[i].split('*')[1].split('%')[1].split('$')[0];
 					imageText=differentPictures[i].split('*')[1].split('%')[1].split('$')[1].split('&')[1];
+					imageArray[i]=galeryURL;
+					textArray[i]=imageText;
 					if(mainPicture=="true")
 					{
 						/*$("#imageTop").css('display', 'block');
@@ -180,7 +186,7 @@
 							viewer.add(differentPictures[i].split('*')[0]);
 							k++;
 						}
-					else
+						else
 						{
 						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 						viewer.add(differentPictures[i].split('*')[0]);
@@ -207,6 +213,33 @@
 					}
 				}
 			});
+		 }
+		 function showNext()
+		 {
+		 imgTxtNext++;
+		 if(imgTxtNext<imageArray.length)
+		 {
+			// console.log(imageArray);
+			 $("#imageTop").empty();
+			 $("#textTop").empty();
+			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
+			 $("#imageTop").append("<img onclick='showNext()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminAdd.png'/>");
+			 $("#imageTop").append("<img onclick='showPrevious()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminRemove.png'/>");
+			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+		  }
+		 }
+		 function showPrevious()
+		 {
+		  imgTxtNext--;
+			if(imgTxtNext>0)
+			{
+			 $("#imageTop").empty();
+			 $("#textTop").empty();
+			 $("#imageTop").append("<img onclick='showNext()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminAdd.png'/>");
+			 $("#imageTop").append("<img onclick='showPrevious()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminRemove.png'/>");
+			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
+			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+			}
 		 }
 		 <!--change galery image-->
 		  function headerShowOnTop(e){
@@ -254,6 +287,7 @@
 				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
 			});
 		 }
+		 
 	</script>
 
 
