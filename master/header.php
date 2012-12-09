@@ -60,6 +60,7 @@
 		var imgTxtNext=1;
 		var viewer = null;
 		var imageArray=new Array();
+			
 		var textArray=new Array();
 		function headerClick(e){
 			<!--empty the imageTop and the text container in case they are full-->
@@ -216,9 +217,9 @@
 		 }
 		 function showNext()
 		 {
-		 imgTxtNext++;
-		 if(imgTxtNext<imageArray.length)
-		 {
+		 
+		 if(imgTxtNext<imageArray.length-1)
+		 {imgTxtNext++;
 			// console.log(imageArray);
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
@@ -230,16 +231,17 @@
 		 }
 		 function showPrevious()
 		 {
-		  imgTxtNext--;
-			if(imgTxtNext>0)
-			{
+		  
+			if(imgTxtNext>1)
+			{imgTxtNext--;
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
 			 $("#imageTop").append("<img onclick='showNext()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminAdd.png'/>");
 			 $("#imageTop").append("<img onclick='showPrevious()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminRemove.png'/>");
 			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
 			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
-			}
+			 }
+			
 		 }
 		 <!--change galery image-->
 		  function headerShowOnTop(e){
