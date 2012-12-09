@@ -147,6 +147,9 @@
 		 <!--enter into galery-->
 		 function headerGaleryClick(e){
 			viewer=new PhotoViewer();
+			 imgTxtNext=1;
+			textArray=[];
+			imageArray=[];
 		 	$("#imageTop").empty();
 			$("#textTop").empty();
 			$("#imageTop").append("<img onclick='showNext()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminAdd.png'/>");
