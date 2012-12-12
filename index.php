@@ -18,9 +18,13 @@
         <!--left-side-->
         <?php include 'master/left-side.php'; ?>
         <!--main content-->
-        <div id="maincontent">
-			<div  id="contentTop">
-				<div id="imageTop" style="float:left; max-width: 546px; width: 546px; min-height: 410px;"></div>
+        <div id="maincontent" >
+			<div  id="contentTop" class="sliding_container" style="width:100%; min-height: 404px">
+			 <button id="page-switcher-start" onclick="showPrevious()" class="page-switcher custom-appearance hidden" tabindex="2" aria-label="Go Back"> <
+			</button>
+			<button  id="page-switcher-end" onclick="showNext()" class="page-switcher custom-appearance hidden" tabindex="2" aria-label="Go to Apps">>
+			</button>
+				<div id="imageTop"   style="float:left; max-width: 546px; width: 546px; min-height: 410px;"></div>
 				<div id="textTop" style="float: left;min-height: 404px;max-width: 275px;width: 275px;max-height: 404px;overflow: overlay;">
 					
 				</div> 
@@ -41,10 +45,11 @@ var html_scroller = false;
 
 $(document).ready(
 
+	
   function() { 
     $("#textTop").niceScroll();
     html_scroller = $("html").niceScroll();
-    
+
   }
 
 );
@@ -54,6 +59,7 @@ function startpage(){
 
 	
   $('#start').trigger('click');
+  
 }
 startpage();
 

@@ -63,6 +63,9 @@
 			
 		var textArray=new Array();
 		function headerClick(e){
+		
+		$('#page-switcher-start').addClass('hidden');
+		$('#page-switcher-end').addClass('hidden');
 			<!--empty the imageTop and the text container in case they are full-->
 		   	$("#imageTop").empty();
 			$("#textTop").empty();
@@ -94,6 +97,7 @@
 				var imageText=pictire_and_text[i].split('*')[1];
 				$("#imageTop").append("<img  class='imgtopContent' src='"+maincontentURL+"'/>");
 				$("#textTop").append("<p class='prod_desc'>"+imageText+"</p> ");	
+				 $("#textTop").getNiceScroll().resize();
 				}
 			});
 			<!--content bottom images-->
@@ -152,8 +156,16 @@
 			imageArray=[];
 		 	$("#imageTop").empty();
 			$("#textTop").empty();
-			$("#imageTop").append("<img onclick='showNext()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminAdd.png'/>");
-			$("#imageTop").append("<img onclick='showPrevious()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminRemove.png'/>");
+			//$("#page-switcher-start").css('visibility','visible');
+			$('#page-switcher-start').removeClass('hidden');
+			$('#page-switcher-end').removeClass('hidden');
+			
+    	//	<button id="page-switcher-end" class="page-switcher custom-appearance" tabindex="2" style="width: 238.875px; right: 13px; top: 0px; padding-bottom: 0px;" aria-label="Go to Apps">›
+		//	</button>
+	//	id='card-slider-frame' class='sliding_container'
+			
+			//$("#contentTop").append("<button onclick='showNext()' id='page-switcher-end' class='page-switcher custom-appearance' tabindex='2' style='width: 238.875px; right: 13px; top: 0px; padding-bottom: 0px;' aria-label='Go to Apps'>></button>"); 
+			//$("#contentTop").append("<button id='page-switcher-start' class='page-switcher custom-appearance' tabindex='2' style='width: 251.875px; left: 0px; top: 0px; padding-bottom: 0px;' aria-label='Go Back'><</button>");
 			/*$("#textTop").css('max-width','0px');
 			$("#textTop").css('min-height','0px');
 			$("#textTop").css('width','0px');*/
@@ -182,10 +194,11 @@
 						$("#imageTop").css('min-height','410px');*/
 						$("#imageTop").append("<img style='max-height:410px'src='"+galeryURL+"'/>");
 						$("#textTop").append("<p class='prod_desc'>"+imageText+"</p>");
+						$("#textTop").getNiceScroll().resize();
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='/images/video.png'/></div></a>");
 							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 							viewer.add(differentPictures[i].split('*')[0]);
 							k++;
@@ -202,7 +215,7 @@
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='/images/video.png'/></div></a>");
 							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 							viewer.add(differentPictures[i].split('*')[0]);
 							k++;
@@ -217,6 +230,7 @@
 					}
 				}
 			});
+			
 		 }
 		 function showNext()
 		 {
@@ -227,9 +241,8 @@
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
 			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
-			 $("#imageTop").append("<img onclick='showNext()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminAdd.png'/>");
-			 $("#imageTop").append("<img onclick='showPrevious()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminRemove.png'/>");
 			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+			  $("#textTop").getNiceScroll().resize();
 		  }
 		 }
 		 function showPrevious()
@@ -239,10 +252,9 @@
 			{imgTxtNext--;
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
-			 $("#imageTop").append("<img onclick='showNext()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminAdd.png'/>");
-			 $("#imageTop").append("<img onclick='showPrevious()' style='float:left; width:40px;' src='http://localhost/feydomproject/images/adminRemove.png'/>");
 			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
 			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+			  $("#textTop").getNiceScroll().resize();
 			 }
 			
 		 }
@@ -290,6 +302,7 @@
 				var topText=topImage.split("#")[1].split("%")[1];
 				$("#imageTop").append("<img class='imgtopContent' src='"+topPicture+"'/>");
 				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+				 $("#textTop").getNiceScroll().resize();
 			});
 		 }
 		 

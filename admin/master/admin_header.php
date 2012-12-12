@@ -20,8 +20,10 @@
 		
 		//check which page is start page and get that id
 		$result = mysql_query("SELECT * FROM left_sidebar");
-		while($row2 = mysql_fetch_array($result)){
+		while($row2 = mysql_fetch_array($result))
+		{
 			$isStartPage=$row2['isStartPage'];
+			
 			if($isStartPage=="true")
 			{
 					$idstart=$row2['id'];
@@ -30,9 +32,9 @@
 		$pom="../";
 		//print logo
 		if($idstart<=3)
-		echo "<a href=javascript: void(0);><div onclick='headerClick(".$idstart.")' class='logo' style='background:url(" .$pom.$slikalogo. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='file'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /></form></div></a>"; 
+		echo "<a href=javascript: void(0);><div onclick='headerClick(".$idstart.")' class='logo' style='background:url(" .$pom.$slikalogo. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_0' id='new_name_0' type='hidden' /><input value='0' name='id_picture_0' id='id_picture_0' type='hidden' /></form></div></a>"; 
 		else
-		echo "<a href=javascript: void(0);><div onclick='sideClick(".$idstart.")' class='logo' style='background:url(" .$slikalogo. ") no-repeat' ><input onclick='javascrtipt:alert(1);' class='edit_button' type='button' value='button' name='button'/></div></a>"; 
+		echo "<a href=javascript: void(0);><div onclick='sideClick(".$idstart.")' class='logo' style='background:url(" .$pom.$slikalogo. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_0' id='new_name_0' type='hidden' /><input value='0' name='id_picture_0' id='id_picture_0' type='hidden' /></form></div></a>"; 
 		
 		$result2 = mysql_query("SELECT * FROM left_sidebar");
 		while($row2 = mysql_fetch_array($result2)){
@@ -45,18 +47,25 @@
 					if($row2['isContact']!="true")
 					{
 						if($isStartPage1=="true")
-						echo "<a href='javascript: void(0);'><div id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><input id='".$slikaSideBar."' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>"; 
+						echo "<a href='javascript: void(0);'><div id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_$id' id='new_name_$id' type='hidden' /><input value='".$id."' name='id_picture_$id' id='id_picture_$id' type='hidden' /></form></div></a>"; 
 						else
-						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><input id='".$slikaSideBar."' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>"; 
+						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_$id' id='new_name_$id' type='hidden' /><input value='".$id."' name='id_picture_$id' id='id_picture_$id' type='hidden' /></form></div></a>"; 
 					}
 					else
-					echo "<a href='javascript: void(0)';><div id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><input id='".$slikaSideBar."' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>";
+					echo "<a href='javascript: void(0)';><div id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_$id' id='new_name_$id' type='hidden' /><input value='".$id."' name='id_picture_$id' id='id_picture_$id' type='hidden' /></form></div></a>";
 				}			 
 		  }
 		mysql_close($con);
 	?>
 
 	<script type="text/javascript">
+	
+	 $('#uploadPicture').change(function() {
+   /*alert($(this).val().split('\\')[$(this).val().split('\\').length-1]); */
+   $("#new_name").val($(this).val().split('\\')[$(this).val().split('\\').length-1]);
+});
+	
+	
 	function fun(e)
 	{
 	alert(e.id);

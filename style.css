@@ -214,6 +214,54 @@ h1 {
 	margin:40px;
 	font-family:Ariel;
 }
-/*~index*/
+/*galery buttons; change pictures with left and right buttons*/
+#card-slider-frame {
+bottom: 0px;
+overflow: hidden;
+position: fixed;
+top: 0;
+width: 100%;
+}
+.page-switcher {
+color: rgba(0, 0, 0, 0.2);
+}
+
+.page-switcher {
+-webkit-transition: width 150ms, right 150ms, background-color 150ms;
+background-color: transparent;
+border: none;
+bottom: 0;
+font-size: 40px;
+margin: 0;
+max-width: 150px;
+min-width: 90px;
+outline: none;
+padding: 0;
+position: absolute;
+top: 0;
+z-index: 5;
+}
 
 
+.sliding_container #page-switcher-end:hover,#page-switcher-start:hover {
+background: -webkit-linear-gradient(top, transparent 0, rgba(0, 0, 0, .01) 60px, rgba(0, 0, 0, .03) 183px);
+background: -moz-linear-gradient(top, transparent 0, rgba(0, 0, 0, .01) 60px, rgba(0, 0, 0, .03) 183px);
+}
+
+#contentTop
+{
+position:relative;
+}
+#page-switcher-end
+{
+width: 238.875px; right: 240px; top: 0px; padding-bottom: 0px;
+}
+#page-switcher-start
+{
+width: 251.875px; left: 0px; top: 0px; padding-bottom: 0px;
+}
+
+.hidden
+{
+display:none;
+}
