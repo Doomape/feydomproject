@@ -1,22 +1,29 @@
 <?php
 	/*echo $_REQUEST["src"];*/
-	
+	//http://localhost/feydomproject/images/topbarImages/feydom_logo.png
+	//echo $_REQUEST["src"];
+	//	echo "<br/>";
 	$path="../".$_REQUEST["src"];
-	$new_name=$_REQUEST["new_name_"+$_REQUEST["id_picture"]];
+	$new_name=$_REQUEST["new_name"];
 	$id=$_REQUEST["id_picture"];
 	$some=explode('/', $path);
 	$fullpath="";
-	
+//	echo $path;
+//	echo "<br/>";
+//	echo $id;
+//	echo "<br/>";
+//	echo $new_name;
+//		echo "<br/>";
 	for($i=0;$i<count($some)-1;$i++)
 	{
 		$fullpath.=$some[$i].'/';
 	}
-	//echo $fullpath.$new_name;
-	//echo "<br/>";
+//	echo $fullpath.$new_name;
+//	echo "<br/>";
 	if (file_exists($path)) 
 	{
 	
-		echo "The file $path exists";
+	//	echo "The file $path exists";
 		unlink($path);
 		move_uploaded_file($_FILES['file']['tmp_name'], $fullpath.$new_name);
 		$con = mysql_connect("localhost","alienper_root","kokikoki");
@@ -24,7 +31,7 @@
 			  {
 			  die('Could not connect: ' . mysql_error());
 			  }
-			  $itemvalue="images/".$new_name;
+			  $itemvalue="images/topbarImages/".$new_name;
 			mysql_select_db("alienper_feydom", $con);
 			mysql_query("UPDATE left_sidebar set sidebarURL='".$itemvalue."' where id='".$id."' ");
 		mysql_close($con);
@@ -32,14 +39,14 @@
 	} 
 	else 
 	{
-		echo "The file $path does not exist";
+		//echo "The file $path does not exist";
 		move_uploaded_file($_FILES['file']['tmp_name'], $fullpath.$new_name);
 		$con = mysql_connect("localhost","alienper_root","kokikoki");
 			if (!$con)
 			  {
 			  die('Could not connect: ' . mysql_error());
 			  }
-			  $itemvalue="images/".$new_name;
+			  $itemvalue="images/topbarImages/".$new_name;
 			mysql_select_db("alienper_feydom", $con);
 			mysql_query("UPDATE left_sidebar set sidebarURL='".$itemvalue."' where id='".$id."' ");
 		mysql_close($con);

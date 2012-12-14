@@ -35,15 +35,11 @@ function logout()
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
 <link rel="stylesheet" type="text/css" href="../style.css">
- <script type="text/javascript" src="../Scripts/jquery.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
- <script type="text/javascript" src="../Scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="../Scripts/slide.js"></script>
 <link rel="stylesheet" type="text/css" href="admin_style.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="../style.css">
-
-<script type="text/javascript" src="uploadifyit/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="uploadifyit/swfobject.js"></script>
 <script type="text/javascript" src="uploadifyit/jquery.uploadify.v2.1.4.min.js"></script>
 <link rel="stylesheet" href="uploadifyit/uploadify.css" type="text/css" />

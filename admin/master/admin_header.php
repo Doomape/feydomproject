@@ -14,10 +14,10 @@
 		
 		//get logo image
 		$result1=mysql_query("SELECT sidebarURL FROM left_sidebar where id=0");
-		while($row1 = mysql_fetch_array($result1)){
+		while($row1 = mysql_fetch_array($result1))
+		{
 			$slikalogo=$row1['sidebarURL'];
 		}
-		
 		//check which page is start page and get that id
 		$result = mysql_query("SELECT * FROM left_sidebar");
 		while($row2 = mysql_fetch_array($result))
@@ -29,12 +29,30 @@
 					$idstart=$row2['id'];
 			}
 		}
-		$pom="../";
 		//print logo
+		$pom="../";
 		if($idstart<=3)
-		echo "<a href=javascript: void(0);><div onclick='headerClick(".$idstart.")' class='logo' style='background:url(" .$pom.$slikalogo. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_0' id='new_name_0' type='hidden' /><input value='0' name='id_picture_0' id='id_picture_0' type='hidden' /></form></div></a>"; 
+		echo "<a href=javascript: void(0);><div onclick='headerClick(".$idstart.")' class='logo' style='background:url(" .$pom.$slikalogo. ") no-repeat' >
+		<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
+		<input type='file' name='file' id='uploadPicture_0'><br>
+		<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+		<input name='src' value='".$slikalogo."' type='hidden' />
+		<input name='new_name' id='new_name_0' type='hidden' />
+		<input value='0' name='id_picture' id='id_picture' type='hidden' />
+		</form>
+		</div>
+		</a>"; 
 		else
-		echo "<a href=javascript: void(0);><div onclick='sideClick(".$idstart.")' class='logo' style='background:url(" .$pom.$slikalogo. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_0' id='new_name_0' type='hidden' /><input value='0' name='id_picture_0' id='id_picture_0' type='hidden' /></form></div></a>"; 
+		echo "<a href=javascript: void(0);><div onclick='sideClick(".$idstart.")' class='logo' style='background:url(" .$pom.$slikalogo. ") no-repeat' >
+		<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
+		<input type='file' name='file' id='uploadPicture_0'><br>
+		<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+		<input name='src' value='".$slikalogo."' type='hidden' />
+		<input name='new_name' id='new_name_0' type='hidden' />
+		<input value='0' name='id_picture' id='id_picture'  type='hidden' />
+		</form>
+		</div>
+		</a>"; 
 		
 		$result2 = mysql_query("SELECT * FROM left_sidebar");
 		while($row2 = mysql_fetch_array($result2)){
@@ -47,12 +65,41 @@
 					if($row2['isContact']!="true")
 					{
 						if($isStartPage1=="true")
-						echo "<a href='javascript: void(0);'><div id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_$id' id='new_name_$id' type='hidden' /><input value='".$id."' name='id_picture_$id' id='id_picture_$id' type='hidden' /></form></div></a>"; 
+						echo "<a href='javascript: void(0);'><div id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
+						<input type='file' name='file' id="."uploadPicture_".$id."><br>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input name='src' value='".$slikaSideBar."' type='hidden' />
+						<input name='new_name' id="."new_name_".$id." type='hidden' />
+						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
+						</form>
+						</div>
+						</a>"; 
 						else
-						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_$id' id='new_name_$id' type='hidden' /><input value='".$id."' name='id_picture_$id' id='id_picture_$id' type='hidden' /></form></div></a>"; 
+						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
+						<input type='file' name='file' id="."uploadPicture_".$id."><br>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input name='src' value='".$slikaSideBar."' type='hidden' />
+						<input name='new_name' id="."new_name_".$id." type='hidden' />
+						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
+						</form>
+						</div>
+						</a>"; 
 					}
 					else
-					echo "<a href='javascript: void(0)';><div id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$slikaSideBar. ") no-repeat' ><form action='../function/upload_file.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='uploadPicture'><br><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='".$slikalogo."' type='hidden' /><input name='new_name_$id' id='new_name_$id' type='hidden' /><input value='".$id."' name='id_picture_$id' id='id_picture_$id' type='hidden' /></form></div></a>";
+					echo "<a href='javascript: void(0)';><div id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+					   <form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
+					
+						<input type='file' name='file' id="."uploadPicture_".$id."><br>
+						<input name='new_name' id="."new_name_".$id." type='hidden' />
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						
+						<input name='src' value='".$slikaSideBar."' type='hidden' />
+						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
+						</form>
+					</div>
+					</a>";
 				}			 
 		  }
 		mysql_close($con);
@@ -60,16 +107,25 @@
 
 	<script type="text/javascript">
 	
-	 $('#uploadPicture').change(function() {
-   /*alert($(this).val().split('\\')[$(this).val().split('\\').length-1]); */
-   $("#new_name").val($(this).val().split('\\')[$(this).val().split('\\').length-1]);
-});
-	
-	
-	function fun(e)
+		$('input[type="file"]').change(function() 
+		{
+			//console.log( $(this).val() );
+			var form = $(this).parent('form');
+			form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
+		});
+			
+
+	/* $('#uploadPicture_0').change(function() 
 	{
-	alert(e.id);
-	}
+		$("#new_name_0").val($(this).val().split('\\')[$(this).val().split('\\').length-1]);
+	});*/
+	 /*alert($(this).val().split('\\')[$(this).val().split('\\').length-1]); */
+	//<input type='file' name='file' id='uploadPicture_0' onclick='YES' class='filebutton'><br>
+			/*
+			console.log( form.find('input[name="new_name"]').length );
+			$(this).parent('form').find('input.new_name').val( $(this).val() );
+			*/
+	
 		var viewer = null;
 		function headerClick(e){
 			<!--empty the imageTop and the text container in case they are full-->
