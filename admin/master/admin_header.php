@@ -126,6 +126,7 @@
 			$(this).parent('form').find('input.new_name').val( $(this).val() );
 			*/
 	
+			var pom="../";
 		var viewer = null;
 		function headerClick(e){
 			<!--empty the imageTop and the text container in case they are full-->
@@ -149,7 +150,6 @@
 			$.post("../function/contentTopImage.php", {data: e }, 
 			<!--get the top image and the top text -->
 			
-			
 			function(image_and_text)
 			{ 
 			    var pictire_and_text=image_and_text.split('#');
@@ -157,7 +157,7 @@
 				{
 				var maincontentURL=pictire_and_text[i].split('*')[0];
 				var imageText=pictire_and_text[i].split('*')[1];
-				$("#imageTop").append("<img  class='imgtopContent' src='"+maincontentURL+"'/>");
+				$("#imageTop").append("<img  class='imgtopContent' src='"+pom+maincontentURL+"'/>");
 				$("#imageTop").append("<input id='"+maincontentURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/>");
 				$("#textTop").append("<p class='prod_desc'>"+imageText+"</p> ");	
 				}
@@ -178,17 +178,17 @@
 					<!--top picture; if imageCheck=top in the database, that image can be display in the imageTop container, in the same page-->
 					if(imageCheck=="top")
 					{
-					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerPutOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/><input id="+maincontentURL+" onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
+					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerPutOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/><input id="+maincontentURL+" onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
 				    }
 					<!--normal picture; picture that is displayed in that page and have no functions-->
 					if(imageCheck=="normal")
 					{
-					    $("#contentBottom").append("<div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/><input id='"+maincontentURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div>");
+					    $("#contentBottom").append("<div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/><input id='"+maincontentURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div>");
 					}
 					<!--galery thumb picture;  top picture = if imageCheck=galery in the database, that image can contain another pictures -->
 					if(imageCheck=="galery")
 					{
-						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerGaleryClick("+idmc+")'  id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/><input id='"+maincontentURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
+						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerGaleryClick("+idmc+")'  id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/><input id='"+maincontentURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
 					}			
 				}					
 			});
@@ -203,7 +203,7 @@
 			{
 				var topPicture=topImage.split("#")[1].split("%")[0];
 				var topText=topImage.split("#")[1].split("%")[1];
-				$("#imageTop").append("<img class='imgtopContent' src='"+topPicture+"'/>");
+				$("#imageTop").append("<img class='imgtopContent' src='"+pom+topPicture+"'/>");
 				$("#imageTop").append("<input id='"+topPicture+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/>");
 				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
 			});
@@ -237,17 +237,17 @@
 						$("#imageTop").css('max-width','821px');
 						$("#imageTop").css('width','821px');
 						$("#imageTop").css('min-height','410px');
-						$("#imageTop").append("<img style='max-height:410px'src='"+galeryURL+"'/>");
+						$("#imageTop").append("<img style='max-height:410px'src='"+pom+galeryURL+"'/>");
 						$("#imageTop").append("<input id='"+galeryURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/>");
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='http://localhost/feydomproject/images/video.png'/><input id='"+idpic+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='../images/video.png'/><input id='"+idpic+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
 						}
 					else
 						{
 						//viewer.add(differentPictures[i].split('*')[0]);
-						$("#contentBottom").append("<a href='javascript:void())'><div class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/><input id='"+galeryURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");	
+						$("#contentBottom").append("<a href='javascript:void())'><div class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/><input id='"+galeryURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");	
 						k++;
 						}
 					}
@@ -256,13 +256,13 @@
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='http://localhost/feydomproject/images/video.png'/><input id='"+idpic+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='../images/video.png'/><input id='"+idpic+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
 						}
 						else
 						{
 						//viewer.add(differentPictures[i].split('*')[0]);
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/><input id='"+galeryURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");	
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/><input id='"+galeryURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");	
 							k++;
 						}
 					}
