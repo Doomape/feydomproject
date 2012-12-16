@@ -2,7 +2,7 @@
 
 	<script type="text/javascript" src="../Scripts/slide.js"></script>
 	 <?php
-	 	$pom="../";
+	 	$pom1="../";
 		$con = mysql_connect("localhost","alienper_root","kokikoki");
 		if (!$con)
 		  {
@@ -21,7 +21,7 @@
 					if($row['isContact']!="true")
 					{
 						if($isStartPage1=="true")
-						echo "<a href='javascript: void(0);'><div id='start' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						echo "<a href='javascript: void(0);'><div id='start' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' >
 						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
 						<input type='file' name='file' id="."uploadPicture_".$id."><br>
 						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
@@ -32,7 +32,7 @@
 						</div>
 						</a>"; 
 						else
-						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' >
 						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
 						<input type='file' name='file' id="."uploadPicture_".$id."><br>
 						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
@@ -45,7 +45,7 @@
 					}
 					else
 					{
-						echo "<a href='javascript: void(0)';><div id='contact' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						echo "<a href='javascript: void(0)';><div id='contact' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' >
 					   <form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
 					
 						<input type='file' name='file' id="."uploadPicture_".$id."><br>
@@ -64,14 +64,26 @@
 	?>
 
 	<script type="text/javascript">
+		
+		var pom="../";
+		
 		$('input[type="file"]').change(function() 
 		{
 			//console.log( $(this).val() );
 			var form = $(this).parent('form');
 			form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
 		});
+			
+
+		var imgTxtNext=1;
 		var viewer = null;
+		var imageArray=new Array();
+			
+		var textArray=new Array();
 		function sideClick(e){
+		
+		$('#page-switcher-start').addClass('hidden');
+		$('#page-switcher-end').addClass('hidden');
 			<!--empty the imageTop and the text container in case they are full-->
 		   	$("#imageTop").empty();
 			$("#textTop").empty();
@@ -86,28 +98,32 @@
 			$("#textTop").css('max-width','275px');
 			$("#textTop").css('min-height','410px');
 			$("#textTop").css('width','275px');
+			<!--content top image-->
+			<!--send the id of the top sidebar pictire -->
 			$("#textTop").css('height','410px');
 			$('#textTop').css('max-height','410px');
-			<!--content top image-->
-			<!--send the id of the left sidebar pictire -->
 			$.post("../function/contentTopImage.php", {data: e }, 
 			<!--get the top image and the top text -->
-			function(image_and_text){ 
+			
+			
+			function(image_and_text)
+			{ 
 			    var pictire_and_text=image_and_text.split('#');
 				for(i=1; i<=pictire_and_text.length-1; i++)
 				{
 				var maincontentURL=pictire_and_text[i].split('*')[0];
 				var imageText=pictire_and_text[i].split('*')[1];
-				$("#imageTop").append("<img  class='imgtopContent' src='"+maincontentURL+"'/>");
-				$("#imageTop").append("<input id='"+maincontentURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/>");
-				$("#textTop").append("<p>"+imageText+"</p> ");	
+				$("#imageTop").append("<img  class='imgtopContent' src='"+pom+maincontentURL+"'/>");
+				$("#textTop").append("<p class='prod_desc'>"+imageText+"</p> ");	
+				 //$("#textTop").getNiceScroll().resize();
 				}
 			});
 			<!--content bottom images-->
-			<!--send the id of the left sidebar pictire -->
+			<!--send the id of the top sidebar pictire -->
 			$.post("../function/contentBottomImage.php", {data: e }, 
 			<!-- get the bottom pictures  -->
-			function(imageBottom){
+			function(imageBottom)
+			{
 				$("#contentBottom").empty();
 				var differentPictures=imageBottom.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
@@ -118,74 +134,97 @@
 					<!--top picture; if imageCheck=top in the database, that image can be display in the imageTop container, in the same page-->
 					if(imageCheck=="top")
 					{
-					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='putOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/><input id="+maincontentURL+" onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
+					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='sidePutOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a>");
 				    }
 					<!--normal picture; picture that is displayed in that page and have no functions-->
 					if(imageCheck=="normal")
 					{
-					    $("#contentBottom").append("<div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/><input id="+maincontentURL+" onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div>");
+					    $("#contentBottom").append("<div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div>");
 					}
 					<!--galery thumb picture;  top picture = if imageCheck=galery in the database, that image can contain another pictures -->
 					if(imageCheck=="galery")
 					{
-						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='galeryClick("+idmc+")'  id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/><input id="+maincontentURL+" onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
+						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='sideGaleryClick("+idmc+")'  id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a>");
 					}			
 				}					
 			});
 
 		 }
 		 <!-- pictures that are displayed on the imageTop container if they are clicked -->
-		 function putOnTop(e){
+		 function sidePutOnTop(e){
 			$("#imageTop").empty();
 			$("#textTop").empty();
 			$.post("../function/showTopImage.php", {data: e }, 
-			function(topImage){
+			function(topImage)
+			{
 				var topPicture=topImage.split("#")[1].split("%")[0];
 				var topText=topImage.split("#")[1].split("%")[1];
-				$("#imageTop").append("<img class='imgtopContent' src='"+topPicture+"'/>");
-				$("#imageTop").append("<input id='"+topPicture+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/>");
+				$("#imageTop").append("<img class='imgtopContent' src='"+pom+topPicture+"'/>");
 				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+                                //$("#textTop").getNiceScroll().resize();
+
 			});
 		 }
 
 		 <!--enter into galery-->
-		 function galeryClick(e){
+		 function sideGaleryClick(e){
 			viewer=new PhotoViewer();
+			 imgTxtNext=1;
+			textArray=[];
+			imageArray=[];
 		 	$("#imageTop").empty();
 			$("#textTop").empty();
-			$("#textTop").css('max-width','0px');
+			//$("#page-switcher-start").css('visibility','visible');
+			$('#page-switcher-start').removeClass('hidden');
+			$('#page-switcher-end').removeClass('hidden');
+			
+    	//	<button id="page-switcher-end" class="page-switcher custom-appearance" tabindex="2" style="width: 238.875px; right: 13px; top: 0px; padding-bottom: 0px;" aria-label="Go to Apps">›
+		//	</button>
+	//	id='card-slider-frame' class='sliding_container'
+			
+			//$("#contentTop").append("<button onclick='showNext()' id='page-switcher-end' class='page-switcher custom-appearance' tabindex='2' style='width: 238.875px; right: 13px; top: 0px; padding-bottom: 0px;' aria-label='Go to Apps'>></button>"); 
+			//$("#contentTop").append("<button id='page-switcher-start' class='page-switcher custom-appearance' tabindex='2' style='width: 251.875px; left: 0px; top: 0px; padding-bottom: 0px;' aria-label='Go Back'><</button>");
+			/*$("#textTop").css('max-width','0px');
 			$("#textTop").css('min-height','0px');
-			$("#textTop").css('width','0px');
+			$("#textTop").css('width','0px');*/
 		    $("#contentBottom").empty();
 			<!-- send the id of the galery that is clicked -->
 			$.post("../function/galery.php", {data: e }, 
 			<!-- get all the pictures of that galery -->
-			function(galeryImages){
+			function(galeryImages)
+			{
 				var k=0;
 				var differentPictures=galeryImages.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
 				{
-					mainPicture=differentPictures[i].split('*')[1].split("%")[0];
-					videoURL=differentPictures[i].split('*')[1].split("%")[1].split('$')[1].split('&')[0];
+					mainPicture=differentPictures[i].split('*')[1].split('%')[0];
+					videoURL=differentPictures[i].split('*')[1].split('%')[1].split('$')[1].split('&')[0];
 					galeryURL=differentPictures[i].split('*')[0];
-					idpic=differentPictures[i].split('*')[1].split("%")[1].split('$')[0];
+					idpic=differentPictures[i].split('*')[1].split('%')[1].split('$')[0];
+					imageText=differentPictures[i].split('*')[1].split('%')[1].split('$')[1].split('&')[1];
+					imageArray[i]=galeryURL;
+					textArray[i]=imageText;
 					if(mainPicture=="true")
 					{
-						$("#imageTop").css('display', 'block');
+						/*$("#imageTop").css('display', 'block');
 						$("#imageTop").css('max-width','821px');
 						$("#imageTop").css('width','821px');
-						$("#imageTop").css('min-height','410px');
-						$("#imageTop").append("<img style='max-height:410px'src='"+galeryURL+"'/>");
-						$("#imageTop").append("<input id='"+galeryURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/>");
+						$("#imageTop").css('min-height','410px');*/
+						$("#imageTop").append("<img style='max-height:410px'src='"+pom+galeryURL+"'/>");
+						$("#textTop").append("<p class='prod_desc'>"+imageText+"</p>");
+						//$("#textTop").getNiceScroll().resize();
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='ShowOnTop("+idpic+")' src='http://localhost/feydomproject/images/video.png'/><input id='"+idpic+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='sideShowOnTop("+idpic+")' src='../images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='sideShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a>");	
+							//viewer.add(differentPictures[i].split('*')[0]);
+							k++;
 						}
-					else
+						else
 						{
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='sideShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a>");	
 						//viewer.add(differentPictures[i].split('*')[0]);
-						$("#contentBottom").append("<a href='javascript:void())'><div class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/><input id='"+galeryURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");	
 						k++;
 						}
 					}
@@ -194,22 +233,55 @@
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='ShowOnTop("+idpic+")' src='http://localhost/feydomproject/images/video.png'/><input id='"+idpic+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");
+							$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='sideShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom' onclick='sideShowOnTop("+idpic+")' src='../images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='sideShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a>");	
+							//viewer.add(differentPictures[i].split('*')[0]);
+							k++;
 						}
 						else
 						{
-						viewer.add(differentPictures[i].split('*')[0]);
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/><input id='"+galeryURL+"' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>");	
-							k++;
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='sideShowImgTxtOnTop("+idpic+")'  class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a>");	
+						//viewer.add(differentPictures[i].split('*')[0]);
+						k++;
 						}
 					}
 				}
 			});
+			
+		 }
+		 function showNext()
+		 {
+		 
+		 if(imgTxtNext<imageArray.length-1)
+		 {
+			imgTxtNext++;
+			// console.log(imageArray);
+			 $("#imageTop").empty();
+			 $("#textTop").empty();
+			 $("#imageTop").append("<img style='max-height:410px'src='"+pom+imageArray[imgTxtNext]+"'/>");
+			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+			  //$("#textTop").getNiceScroll().resize();
+		  }
+		 }
+		 function showPrevious()
+		 {
+		  
+			if(imgTxtNext>1)
+			{
+			imgTxtNext--;
+			 $("#imageTop").empty();
+			 $("#textTop").empty();
+			 $("#imageTop").append("<img style='max-height:410px'src='"+pom+imageArray[imgTxtNext]+"'/>");
+			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+			  //$("#textTop").getNiceScroll().resize();
+			 }
+			
 		 }
 		 <!--change galery image-->
-		 function ShowOnTop(e){
+		  function sideShowOnTop(e){
 			$("#imageTop").empty();
+			$("#textTop").empty();
 			$.post("../function/galeryTopImage.php", {data: e }, 
 			function(topVideo)
 			{
@@ -217,9 +289,43 @@
 				$("#imageTop").css('max-width','821px');
 				$("#imageTop").css('width','821px');
 				$("#imageTop").css('min-height','410px');
-				$("#imageTop").append("<iframe width='821' height='410' src='"+topVideo+"'  frameborder='0' allowfullscreen></iframe>");
+				$("#textTop").css('max-width','0px');
+				$("#textTop").css('min-height','0px');
+				$("#textTop").css('width','0px');
+				$("#imageTop").append("<iframe width='821' height='410' src='"+pom+topVideo+"'  frameborder='0' allowfullscreen></iframe>");
 			});
 		 }  
+		 function sideShowImgTxtOnTop(e)
+		 {
+		 	$("#imageTop").empty();
+			$("#textTop").empty();
+			<!--show the containers -->
+			$("#contentTop").css('display', 'block');
+		    $("#contentBottom").css('display', 'block');
+			<!--setting width and height in case they are changed in another entering level -->
+			$("#imageTop").css('max-width','546px');
+			$("#imageTop").css('min-height','410px');
+			$("#imageTop").css('width','546px');
+			<!---//--->
+			$("#textTop").css('max-width','275px');
+			$("#textTop").css('min-height','410px');
+			$("#textTop").css('width','275px');
+			<!--content top image-->
+			<!--send the id of the top sidebar pictire -->
+			$("#textTop").css('height','410px');
+			$('#textTop').css('max-height','410px');
+			
+			$.post("../function/showImageTextInGalery.php", {data: e }, 
+			function(topImage)
+			{
+				var topPicture=topImage.split("#")[1].split("%")[0];
+				var topText=topImage.split("#")[1].split("%")[1];
+				$("#imageTop").append("<img class='imgtopContent' src='"+pom+topPicture+"'/>");
+				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+				 //$("#textTop").getNiceScroll().resize();
+			});
+		 }
+		 
 	</script>
 	
 	
