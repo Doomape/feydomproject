@@ -49,6 +49,7 @@ function logout()
 <body>
 <div id="wrap">
     <div id="main">
+		<a style="top: 0;right:0;position:absolute" background: url('../images/logout.png');height: 30px;display: block;width: 30px;" href="?run=logout"></a>
         <!--header-->
         <?php include 'master/admin_header.php'; ?>
         <!--left-side-->
