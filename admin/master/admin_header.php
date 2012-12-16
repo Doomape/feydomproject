@@ -126,7 +126,7 @@
 			$(this).parent('form').find('input.new_name').val( $(this).val() );
 			*/
 	
-			var pom="../";
+		var pom="../";
 		var viewer = null;
 		function headerClick(e){
 			<!--empty the imageTop and the text container in case they are full-->
