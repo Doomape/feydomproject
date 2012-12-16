@@ -34,9 +34,15 @@
 	?>
 
 	<script type="text/javascript">
-	
+		var imgTxtNext=1;
 		var viewer = null;
+		var imageArray=new Array();
+			
+		var textArray=new Array();
 		function sideClick(e){
+		
+		$('#page-switcher-start').addClass('hidden');
+		$('#page-switcher-end').addClass('hidden');
 			<!--empty the imageTop and the text container in case they are full-->
 		   	$("#imageTop").empty();
 			$("#textTop").empty();
@@ -51,27 +57,32 @@
 			$("#textTop").css('max-width','275px');
 			$("#textTop").css('min-height','410px');
 			$("#textTop").css('width','275px');
+			<!--content top image-->
+			<!--send the id of the top sidebar pictire -->
 			$("#textTop").css('height','410px');
 			$('#textTop').css('max-height','410px');
-			<!--content top image-->
-			<!--send the id of the left sidebar pictire -->
 			$.post("function/contentTopImage.php", {data: e }, 
 			<!--get the top image and the top text -->
-			function(image_and_text){ 
+			
+			
+			function(image_and_text)
+			{ 
 			    var pictire_and_text=image_and_text.split('#');
 				for(i=1; i<=pictire_and_text.length-1; i++)
 				{
 				var maincontentURL=pictire_and_text[i].split('*')[0];
 				var imageText=pictire_and_text[i].split('*')[1];
 				$("#imageTop").append("<img  class='imgtopContent' src='"+maincontentURL+"'/>");
-				$("#textTop").append("<p>"+imageText+"</p> ");	
+				$("#textTop").append("<p class='prod_desc'>"+imageText+"</p> ");	
+				 $("#textTop").getNiceScroll().resize();
 				}
 			});
 			<!--content bottom images-->
-			<!--send the id of the left sidebar pictire -->
+			<!--send the id of the top sidebar pictire -->
 			$.post("function/contentBottomImage.php", {data: e }, 
 			<!-- get the bottom pictures  -->
-			function(imageBottom){
+			function(imageBottom)
+			{
 				$("#contentBottom").empty();
 				var differentPictures=imageBottom.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
@@ -82,7 +93,7 @@
 					<!--top picture; if imageCheck=top in the database, that image can be display in the imageTop container, in the same page-->
 					if(imageCheck=="top")
 					{
-					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='putOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/></div></a>");
+					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='sidePutOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/></div></a>");
 				    }
 					<!--normal picture; picture that is displayed in that page and have no functions-->
 					if(imageCheck=="normal")
@@ -92,30 +103,46 @@
 					<!--galery thumb picture;  top picture = if imageCheck=galery in the database, that image can contain another pictures -->
 					if(imageCheck=="galery")
 					{
-						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='galeryClick("+idmc+")'  id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/></div></a>");
+						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='sideGaleryClick("+idmc+")'  id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+maincontentURL+"'/></div></a>");
 					}			
 				}					
 			});
 
 		 }
 		 <!-- pictures that are displayed on the imageTop container if they are clicked -->
-		 function putOnTop(e){
+		 function sidePutOnTop(e){
 			$("#imageTop").empty();
 			$("#textTop").empty();
 			$.post("function/showTopImage.php", {data: e }, 
-			function(topImage){
+			function(topImage)
+			{
 				var topPicture=topImage.split("#")[1].split("%")[0];
 				var topText=topImage.split("#")[1].split("%")[1];
 				$("#imageTop").append("<img class='imgtopContent' src='"+topPicture+"'/>");
 				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+                                $("#textTop").getNiceScroll().resize();
+
 			});
 		 }
 
 		 <!--enter into galery-->
-	 function galeryClick(e){
+		 function sideGaleryClick(e){
 			viewer=new PhotoViewer();
+			 imgTxtNext=1;
+			textArray=[];
+			imageArray=[];
 		 	$("#imageTop").empty();
 			$("#textTop").empty();
+			//$("#page-switcher-start").css('visibility','visible');
+			$('#page-switcher-start').removeClass('hidden');
+			$('#page-switcher-end').removeClass('hidden');
+			
+    	//	<button id="page-switcher-end" class="page-switcher custom-appearance" tabindex="2" style="width: 238.875px; right: 13px; top: 0px; padding-bottom: 0px;" aria-label="Go to Apps">›
+		//	</button>
+	//	id='card-slider-frame' class='sliding_container'
+			
+			//$("#contentTop").append("<button onclick='showNext()' id='page-switcher-end' class='page-switcher custom-appearance' tabindex='2' style='width: 238.875px; right: 13px; top: 0px; padding-bottom: 0px;' aria-label='Go to Apps'>></button>"); 
+			//$("#contentTop").append("<button id='page-switcher-start' class='page-switcher custom-appearance' tabindex='2' style='width: 251.875px; left: 0px; top: 0px; padding-bottom: 0px;' aria-label='Go Back'><</button>");
 			/*$("#textTop").css('max-width','0px');
 			$("#textTop").css('min-height','0px');
 			$("#textTop").css('width','0px');*/
@@ -134,6 +161,8 @@
 					galeryURL=differentPictures[i].split('*')[0];
 					idpic=differentPictures[i].split('*')[1].split('%')[1].split('$')[0];
 					imageText=differentPictures[i].split('*')[1].split('%')[1].split('$')[1].split('&')[1];
+					imageArray[i]=galeryURL;
+					textArray[i]=imageText;
 					if(mainPicture=="true")
 					{
 						/*$("#imageTop").css('display', 'block');
@@ -142,17 +171,18 @@
 						$("#imageTop").css('min-height','410px');*/
 						$("#imageTop").append("<img style='max-height:410px'src='"+galeryURL+"'/>");
 						$("#textTop").append("<p class='prod_desc'>"+imageText+"</p>");
+						$("#textTop").getNiceScroll().resize();
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='showOnTop("+idpic+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
-							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
+							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='sideShowOnTop("+idpic+")' src='/images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='sideShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 							viewer.add(differentPictures[i].split('*')[0]);
 							k++;
 						}
-					else
+						else
 						{
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='showImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='sideShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 						viewer.add(differentPictures[i].split('*')[0]);
 						k++;
 						}
@@ -162,24 +192,53 @@
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='showImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom' onclick='showOnTop("+idpic+")' src='http://localhost/feydomproject/images/video.png'/></div></a>");
-							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
+							$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='sideShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom' onclick='sideShowOnTop("+idpic+")' src='/images/video.png'/></div></a>");
+							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='sideShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 							viewer.add(differentPictures[i].split('*')[0]);
 							k++;
 						}
 						else
 						{
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='showImgTxtOnTop("+idpic+")'  class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='sideShowImgTxtOnTop("+idpic+")'  class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 						viewer.add(differentPictures[i].split('*')[0]);
 						k++;
 						}
 					}
 				}
 			});
+			
+		 }
+		 function showNext()
+		 {
+		 
+		 if(imgTxtNext<imageArray.length-1)
+		 {
+			imgTxtNext++;
+			// console.log(imageArray);
+			 $("#imageTop").empty();
+			 $("#textTop").empty();
+			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
+			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+			  $("#textTop").getNiceScroll().resize();
+		  }
+		 }
+		 function showPrevious()
+		 {
+		  
+			if(imgTxtNext>1)
+			{
+			imgTxtNext--;
+			 $("#imageTop").empty();
+			 $("#textTop").empty();
+			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
+			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+			  $("#textTop").getNiceScroll().resize();
+			 }
+			
 		 }
 		 <!--change galery image-->
-		  function showOnTop(e){
+		  function sideShowOnTop(e){
 			$("#imageTop").empty();
 			$("#textTop").empty();
 			$.post("function/galeryTopImage.php", {data: e }, 
@@ -195,8 +254,7 @@
 				$("#imageTop").append("<iframe width='821' height='410' src='"+topVideo+"'  frameborder='0' allowfullscreen></iframe>");
 			});
 		 }  
-
-		 function showImgTxtOnTop(e)
+		 function sideShowImgTxtOnTop(e)
 		 {
 		 	$("#imageTop").empty();
 			$("#textTop").empty();
@@ -223,8 +281,10 @@
 				var topText=topImage.split("#")[1].split("%")[1];
 				$("#imageTop").append("<img class='imgtopContent' src='"+topPicture+"'/>");
 				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+				 $("#textTop").getNiceScroll().resize();
 			});
-		 }		 
+		 }
+		 
 	</script>
 	
 	

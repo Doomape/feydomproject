@@ -236,7 +236,8 @@
 		 {
 		 
 		 if(imgTxtNext<imageArray.length-1)
-		 {imgTxtNext++;
+		 {
+			imgTxtNext++;
 			// console.log(imageArray);
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
@@ -249,7 +250,8 @@
 		 {
 		  
 			if(imgTxtNext>1)
-			{imgTxtNext--;
+			{
+			imgTxtNext--;
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
 			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");

@@ -76,7 +76,7 @@ function logout()
     </div>
 </div>
 <!--footer-->
-
+<?php include 'master/footer.php'; ?>
 <script type="text/javascript">
 
 function startpage(){

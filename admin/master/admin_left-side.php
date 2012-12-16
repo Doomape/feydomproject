@@ -2,6 +2,7 @@
 
 	<script type="text/javascript" src="../Scripts/slide.js"></script>
 	 <?php
+	 	$pom="../";
 		$con = mysql_connect("localhost","alienper_root","kokikoki");
 		if (!$con)
 		  {
@@ -20,13 +21,42 @@
 					if($row['isContact']!="true")
 					{
 						if($isStartPage1=="true")
-							echo "<a href='javascript: void(0);'><div id='start' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' ><input id='".$slikaSideBar."' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>";
+						echo "<a href='javascript: void(0);'><div id='start' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
+						<input type='file' name='file' id="."uploadPicture_".$id."><br>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input name='src' value='".$slikaSideBar."' type='hidden' />
+						<input name='new_name' id="."new_name_".$id." type='hidden' />
+						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
+						</form>
+						</div>
+						</a>"; 
 						else
-							echo "<a href='javascript: void(0);'><div id="."img_".$id." onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' ><input id='".$slikaSideBar."' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>"; 
+						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
+						<input type='file' name='file' id="."uploadPicture_".$id."><br>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input name='src' value='".$slikaSideBar."' type='hidden' />
+						<input name='new_name' id="."new_name_".$id." type='hidden' />
+						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
+						</form>
+						</div>
+						</a>"; 
 					}
 					else
 					{
-						echo "<a href='javascript: void(0);'><div id='contact' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$slikaSideBar. ") no-repeat' ><input id='".$slikaSideBar."' onclick='fun(this);' class='edit_button' type='button' value='button' name='button'/></div></a>"; 
+						echo "<a href='javascript: void(0)';><div id='contact' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+					   <form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
+					
+						<input type='file' name='file' id="."uploadPicture_".$id."><br>
+						<input name='new_name' id="."new_name_".$id." type='hidden' />
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						
+						<input name='src' value='".$slikaSideBar."' type='hidden' />
+						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
+						</form>
+						</div>
+						</a>";
 					}
 				 }
 		  }
@@ -34,10 +64,12 @@
 	?>
 
 	<script type="text/javascript">
-	function fun(e)
-	{
-	alert(e.id);
-	}
+		$('input[type="file"]').change(function() 
+		{
+			//console.log( $(this).val() );
+			var form = $(this).parent('form');
+			form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
+		});
 		var viewer = null;
 		function sideClick(e){
 			<!--empty the imageTop and the text container in case they are full-->

@@ -18,6 +18,7 @@
 	{
 		$fullpath.=$some[$i].'/';
 	}
+
 //	echo $fullpath.$new_name;
 //	echo "<br/>";
 	if (file_exists($path)) 
@@ -31,7 +32,7 @@
 			  {
 			  die('Could not connect: ' . mysql_error());
 			  }
-			  $itemvalue="images/topbarImages/".$new_name;
+			  $itemvalue="images/".$some[2]."/".$new_name;
 			mysql_select_db("alienper_feydom", $con);
 			mysql_query("UPDATE left_sidebar set sidebarURL='".$itemvalue."' where id='".$id."' ");
 		mysql_close($con);
@@ -46,7 +47,7 @@
 			  {
 			  die('Could not connect: ' . mysql_error());
 			  }
-			  $itemvalue="images/topbarImages/".$new_name;
+			  $itemvalue="images/".$some[2]."/".$new_name;
 			mysql_select_db("alienper_feydom", $con);
 			mysql_query("UPDATE left_sidebar set sidebarURL='".$itemvalue."' where id='".$id."' ");
 		mysql_close($con);
