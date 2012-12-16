@@ -228,7 +228,7 @@
 				for(i=1; i<=differentPictures.length-1; i++)
 				{
 					mainPicture=differentPictures[i].split('*')[1].split("%")[0];
-					videoURL=differentPictures[i].split('*')[1].split("%")[1].split('$')[1];
+					videoURL=differentPictures[i].split('*')[1].split('%')[1].split('$')[1].split('&')[0];
 					galeryURL=differentPictures[i].split('*')[0];
 					idpic=differentPictures[i].split('*')[1].split("%")[1].split('$')[0];
 					if(mainPicture=="true")
