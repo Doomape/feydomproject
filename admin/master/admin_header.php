@@ -176,19 +176,25 @@
 					<!--top picture; if imageCheck=top in the database, that image can be display in the imageTop container, in the same page-->
 					if(imageCheck=="top")
 					{
-					    $("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerPutOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a>");
+					    $("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div onclick='headerPutOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");
 				    }
 					<!--normal picture; picture that is displayed in that page and have no functions-->
 					if(imageCheck=="normal")
 					{
-					    $("#contentBottom").append("<div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div>");
+					    $("#contentBottom").append("<div class='contentBottom' style='position:relative'><div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");
 					}
 					<!--galery thumb picture;  top picture = if imageCheck=galery in the database, that image can contain another pictures -->
 					if(imageCheck=="galery")
 					{
-						$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerGaleryClick("+idmc+")'  id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a>");
+						$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div onclick='headerGaleryClick("+idmc+")'  id='thumbPicture' ><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");				
 					}			
-				}					
+				}		
+				$('input[type="file"]').change(function() 
+				{
+					//console.log( $(this).val() );
+					var form = $(this).parent('form');
+					form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
+				});				
 			});
 
 		 }
@@ -259,13 +265,13 @@
 						{
 							$("#contentBottom").css('display', 'block');
 							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='../images/video.png'/></div></a>");
-							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a>");	
+							$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idpic+10+"' ><br><input name='new_name' id='contentNew_name_"+idpic+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+galeryURL+"' type='hidden' /><input value='"+idpic+"' name='id_picture' id='content"+idpic+10+" ' type='hidden' /></form></div>");	
 							//viewer.add(differentPictures[i].split('*')[0]);
 							k++;
 						}
 						else
 						{
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a>");	
+							$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idpic+10+"' ><br><input name='new_name' id='contentNew_name_"+idpic+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+galeryURL+"' type='hidden' /><input value='"+idpic+"' name='id_picture' id='content"+idpic+10+" ' type='hidden' /></form></div>");	
 						//viewer.add(differentPictures[i].split('*')[0]);
 						k++;
 						}
@@ -276,19 +282,25 @@
 						{
 							$("#contentBottom").css('display', 'block');
 							$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='../images/video.png'/></div></a>");
-							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a>");	
+							$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idpic+10+"' ><br><input name='new_name' id='contentNew_name_"+idpic+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+galeryURL+"' type='hidden' /><input value='"+idpic+"' name='id_picture' id='content"+idpic+10+" ' type='hidden' /></form></div>");	
 							//viewer.add(differentPictures[i].split('*')[0]);
 							k++;
 						}
 						else
 						{
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")'  class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a>");	
+							$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idpic+10+"' ><br><input name='new_name' id='contentNew_name_"+idpic+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+galeryURL+"' type='hidden' /><input value='"+idpic+"' name='id_picture' id='content"+idpic+10+" ' type='hidden' /></form></div>");	
 						//viewer.add(differentPictures[i].split('*')[0]);
 						k++;
 						}
 					}
 				}
+				$('input[type="file"]').change(function() 
+				{
+					//console.log( $(this).val() );
+					var form = $(this).parent('form');
+					form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
+				});		
 			});
 			
 		 }

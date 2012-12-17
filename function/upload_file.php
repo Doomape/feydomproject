@@ -8,12 +8,15 @@
 	$id=$_REQUEST["id_picture"];
 	$some=explode('/', $path);
 	$fullpath="";
-//	echo $path;
-//	echo "<br/>";
-//	echo $id;
-//	echo "<br/>";
-//	echo $new_name;
-//		echo "<br/>";
+/*echo $some[2];
+echo "<br/>";
+	echo $path;
+	echo "<br/>";
+echo $id;
+	echo "<br/>";
+echo $new_name;
+		echo "<br/>";*/
+
 	for($i=0;$i<count($some)-1;$i++)
 	{
 		$fullpath.=$some[$i].'/';
@@ -28,13 +31,21 @@
 		unlink($path);
 		move_uploaded_file($_FILES['file']['tmp_name'], $fullpath.$new_name);
 		$con = mysql_connect("localhost","alienper_root","kokikoki");
-			if (!$con)
-			  {
-			  die('Could not connect: ' . mysql_error());
-			  }
-			  $itemvalue="images/".$some[2]."/".$new_name;
-			mysql_select_db("alienper_feydom", $con);
-			mysql_query("UPDATE left_sidebar set sidebarURL='".$itemvalue."' where id='".$id."' ");
+			if (!$con) {  die('Could not connect: ' . mysql_error()); }
+				$itemvalue="images/".$some[2]."/".$new_name;
+				mysql_select_db("alienper_feydom", $con);
+				if($some[2]==="topbarImages" or $some[2]==="sidebarImages" )
+				{
+				mysql_query("UPDATE left_sidebar set sidebarURL='".$itemvalue."' where id='".$id."' ");
+				}
+				if($some[2]==="galeryThumb")
+				{
+				mysql_query("UPDATE main_content set maincontentURL='".$itemvalue."' where idmc='".$id."' ");
+				}
+				if($some[2]==="galery")
+				{
+				mysql_query("UPDATE galery set galeryURL='".$itemvalue."' where idpic='".$id."' ");
+				}
 		mysql_close($con);
 		header( 'Location: ../admin/Administrator.php' );
 	} 
@@ -43,13 +54,21 @@
 		//echo "The file $path does not exist";
 		move_uploaded_file($_FILES['file']['tmp_name'], $fullpath.$new_name);
 		$con = mysql_connect("localhost","alienper_root","kokikoki");
-			if (!$con)
-			  {
-			  die('Could not connect: ' . mysql_error());
-			  }
-			  $itemvalue="images/".$some[2]."/".$new_name;
-			mysql_select_db("alienper_feydom", $con);
-			mysql_query("UPDATE left_sidebar set sidebarURL='".$itemvalue."' where id='".$id."' ");
+				if (!$con) {  die('Could not connect: ' . mysql_error()); }
+				$itemvalue="images/".$some[2]."/".$new_name;
+				mysql_select_db("alienper_feydom", $con);
+				if($some[2]==="topbarImages" or $some[2]==="sidebarImages" )
+				{
+				mysql_query("UPDATE left_sidebar set sidebarURL='".$itemvalue."' where id='".$id."' ");
+				}
+					if($some[2]==="galeryThumb")
+				{
+				mysql_query("UPDATE main_content set maincontentURL='".$itemvalue."' where idmc='".$id."' ");
+				}
+				if($some[2]==="galery")
+				{
+				mysql_query("UPDATE galery set galeryURL='".$itemvalue."' where idpic='".$id."' ");
+				}
 		mysql_close($con);
 		header( 'Location: ../admin/Administrator.php' );
 	}
