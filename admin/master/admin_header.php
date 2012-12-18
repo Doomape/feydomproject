@@ -108,6 +108,8 @@
 	<script type="text/javascript">
 		
 		var pom="../";
+		var whichpage=1;
+		var whichgalery=1;
 		
 		$('input[type="file"]').change(function() 
 		{
@@ -124,6 +126,9 @@
 		var textArray=new Array();
 		function headerClick(e){
 		
+			<!--setting the global variable to clicked number to know which page are we on  -->
+			whichpage=e;
+			
 		$('#page-switcher-start').addClass('hidden');
 		$('#page-switcher-end').addClass('hidden');
 			<!--empty the imageTop and the text container in case they are full-->
@@ -156,7 +161,7 @@
 				var maincontentURL=pictire_and_text[i].split('*')[0];
 				var imageText=pictire_and_text[i].split('*')[1];
 				$("#imageTop").append("<img  class='imgtopContent' src='"+pom+maincontentURL+"'/>");
-				$("#textTop").append("<p class='prod_desc'>"+imageText+"</p> ");	
+				$("#textTop").append("<textarea id='main_content_"+e+"_1' style='width:263px;height:410px'>"+imageText+"</textarea> ");	
 				 //$("#textTop").getNiceScroll().resize();
 				}
 			});
@@ -208,7 +213,7 @@
 				var topPicture=topImage.split("#")[1].split("%")[0];
 				var topText=topImage.split("#")[1].split("%")[1];
 				$("#imageTop").append("<img class='imgtopContent' src='"+pom+topPicture+"'/>");
-				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+				$("#textTop").append("<textarea id='main_content_"+whichpage+"_"+e+"' style='width:263px;height:410px'>"+topText+"</textarea>");
                                 //$("#textTop").getNiceScroll().resize();
 
 			});
@@ -241,6 +246,7 @@
 			<!-- get all the pictures of that galery -->
 			function(galeryImages)
 			{
+				whichgalery=e;
 				var k=0;
 				var differentPictures=galeryImages.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
@@ -259,7 +265,7 @@
 						$("#imageTop").css('width','821px');
 						$("#imageTop").css('min-height','410px');*/
 						$("#imageTop").append("<img style='max-height:410px'src='"+pom+galeryURL+"'/>");
-						$("#textTop").append("<p class='prod_desc'>"+imageText+"</p>");
+						$("#textTop").append("<textarea id='galery_"+e+"_"+idpic+"' style='width:263px;height:410px'>"+imageText+"</textarea>");
 						//$("#textTop").getNiceScroll().resize();
 						if(videoURL!="/")
 						{
@@ -307,21 +313,21 @@
 		 function showNext()
 		 {
 		 
-		 if(imgTxtNext<imageArray.length-1)
-		 {
-			imgTxtNext++;
-			// console.log(imageArray);
-			 $("#imageTop").empty();
-			 $("#textTop").empty();
-			 $("#imageTop").append("<img style='max-height:410px'src='"+pom+imageArray[imgTxtNext]+"'/>");
-			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
-			  //$("#textTop").getNiceScroll().resize();
-		  }
+			 /*if(imgTxtNext<imageArray.length-1)
+			 {
+				imgTxtNext++;
+				// console.log(imageArray);
+				 $("#imageTop").empty();
+				 $("#textTop").empty();
+				 $("#imageTop").append("<img style='max-height:410px'src='"+pom+imageArray[imgTxtNext]+"'/>");
+				 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
+				  //$("#textTop").getNiceScroll().resize();
+			  }*/
 		 }
 		 function showPrevious()
 		 {
 		  
-			if(imgTxtNext>1)
+			/*if(imgTxtNext>1)
 			{
 			imgTxtNext--;
 			 $("#imageTop").empty();
@@ -329,7 +335,7 @@
 			 $("#imageTop").append("<img style='max-height:410px'src='"+pom+imageArray[imgTxtNext]+"'/>");
 			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
 			  //$("#textTop").getNiceScroll().resize();
-			 }
+			 }*/
 			
 		 }
 		 <!--change galery image-->
@@ -375,7 +381,7 @@
 				var topPicture=topImage.split("#")[1].split("%")[0];
 				var topText=topImage.split("#")[1].split("%")[1];
 				$("#imageTop").append("<img class='imgtopContent' src='"+pom+topPicture+"'/>");
-				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+				$("#textTop").append("<textarea id='galery_"+whichgalery+"_"+e+"' style='width:263px;height:410px'>"+topText+"</textarea>");
 				 //$("#textTop").getNiceScroll().resize();
 			});
 		 }
