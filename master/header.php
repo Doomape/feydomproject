@@ -94,7 +94,8 @@
 				for(i=1; i<=pictire_and_text.length-1; i++)
 				{
 				var maincontentURL=pictire_and_text[i].split('*')[0];
-				var imageText=pictire_and_text[i].split('*')[1];
+				var imageText=pictire_and_text[i].split('*')[1].split('%')[0];
+				var idmc=pictire_and_text[i].split('*')[1].split('%')[1];
 				$("#imageTop").append("<img  class='imgtopContent' src='"+maincontentURL+"'/>");
 				$("#textTop").append("<p class='prod_desc'>"+imageText+"</p> ");	
 				 $("#textTop").getNiceScroll().resize();

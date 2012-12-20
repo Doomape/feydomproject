@@ -9,13 +9,13 @@
 		  die('Could not connect: ' . mysql_error());
 		  }     
 		mysql_select_db("alienper_feydom", $con);
-		 
+		$pom=1;
 		$result = mysql_query("SELECT * FROM left_sidebar");
-		while($row = mysql_fetch_array($result)){
+		while($row = mysql_fetch_array($result))
+		{
 				 $slikaSideBar=$row['sidebarURL'];
 				 $id=$row['id'];
 				 $isStartPage1=$row['isStartPage'];
-				 
 				 if($id>=4)
 				 {
 					if($row['isContact']!="true")
@@ -59,13 +59,31 @@
 						</a>";
 					}
 				 }
-		  }
+				
+		 }
+		 // echo $pom;
+		 $idmax=mysql_query("SELECT max(id) FROM left_sidebar ");
+		 while($rowy = mysql_fetch_array($idmax))
+		 {
+			$idM=$rowy['max(id)'];
+		 }
+		 $pom=$idM+1;
+		 $addPicture="../images/adminAdd.png";
+		  echo "<a href='javascript: void(0)';><div id="."img_".$pom." class='imgside' style='background:url(".$addPicture.") no-repeat' >
+		  	
+			<form class='probaclick' action='../function/upload_left_picture.php' method='post' enctype='multipart/form-data'>
+				<input type='file' name='file' id="."uploadPicture_".$pom."><br>
+				<input name='new_name' id="."new_name_".$pom." type='hidden' />
+				<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+				<input value='".$pom."' name='id_picture' id='id_picture' type='hidden' />
+			</form>
+		  
+		  </div>
+		  </a>"; 
 		mysql_close($con);
 	?>
 
 	<script type="text/javascript">
-		
-		var pom="../";
 		
 		$('input[type="file"]').change(function() 
 		{
@@ -73,17 +91,29 @@
 			var form = $(this).parent('form');
 			form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
 		});
-			
-
+		
+		var pom="../";
 		var imgTxtNext=1;
 		var viewer = null;
 		var imageArray=new Array();
-			
+		var addPicture="../images/adminAdd.png";	
 		var textArray=new Array();
 		function sideClick(e){
 		
-		$('#page-switcher-start').addClass('hidden');
-		$('#page-switcher-end').addClass('hidden');
+			$.post("../function/checkRowExist.php", {data: e },
+			function(doesExist)
+			{
+				if(doesExist==0)
+				{
+			//	  $("#contentBottom").append("<a href='javascript: void(0);'><div id='main_content@"+e+"@1' class='contentBottom' style='background:url('../images/adminAdd.png') no-repeat'></div></a>");
+				//  $("#contentBottom").append("<a href='javascript: void(0);'><div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a>");
+				  			
+			}
+			});
+		
+		
+			$('#page-switcher-start').addClass('hidden');
+			$('#page-switcher-end').addClass('hidden');
 			<!--empty the imageTop and the text container in case they are full-->
 		   	$("#imageTop").empty();
 			$("#textTop").empty();

@@ -121,101 +121,123 @@
 
 		var imgTxtNext=1;
 		var viewer = null;
-		var imageArray=new Array();
-			
+	//	var doesExist=0;
+		var imageArray=new Array();			
 		var textArray=new Array();
 		
 		function save_text()
 		{
-	
-		//alert(	$('textarea').attr("id"));
-		//alert( $('textarea').attr("id")+"#"+$('textarea').val());
-			//$.post("../function/saveText.php", {data:  $('textarea').attr("id")+"#"+$('textarea').val() });
-			var e=$('textarea').attr("id")+"#"+$('textarea').val();
-		$.post("../function/saveText.php", {data: e }, function()	{	alert("The text is changed");});
+		var e=$('textarea').attr("id")+"#"+$('textarea').val();
+		$.post("../function/saveText.php", {data: e }, 
+		function()	
+		{	
+			alert("The text is changed");
+		});
 		}
-		
-		function headerClick(e){
-		
-			<!--setting the global variable to clicked number to know which page are we on  -->
-			whichpage=e;
-			
-		$('#page-switcher-start').addClass('hidden');
-		$('#page-switcher-end').addClass('hidden');
-			<!--empty the imageTop and the text container in case they are full-->
-		   	$("#imageTop").empty();
-			$("#textTop").empty();
-			<!--show the containers -->
-			$("#contentTop").css('display', 'block');
-		    $("#contentBottom").css('display', 'block');
-			<!--setting width and height in case they are changed in another entering level -->
-			$("#imageTop").css('max-width','546px');
-			$("#imageTop").css('min-height','410px');
-			$("#imageTop").css('width','546px');
-			<!---//--->
-			$("#textTop").css('max-width','275px');
-			$("#textTop").css('min-height','410px');
-			$("#textTop").css('width','275px');
-			<!--content top image-->
-			<!--send the id of the top sidebar pictire -->
-			$("#textTop").css('height','410px');
-			$('#textTop').css('max-height','410px');
-			$.post("../function/contentTopImage.php", {data: e }, 
-			<!--get the top image and the top text -->
-			
-			
-			function(image_and_text)
-			{ 
-			    var pictire_and_text=image_and_text.split('#');
-				for(i=1; i<=pictire_and_text.length-1; i++)
+		function headerClick(e)
+		{
+			  
+			$.post("../function/checkRowExist.php", {data: e },
+			function(rowExist)
+			{		
+				if(rowExist==0)
 				{
-				var maincontentURL=pictire_and_text[i].split('*')[0];
-				var imageText=pictire_and_text[i].split('*')[1].split('%')[0];
-				var idmc=pictire_and_text[i].split('*')[1].split('%')[1];
-				$("#imageTop").append("<img  class='imgtopContent' src='"+pom+maincontentURL+"'/>");
-				$("#textTop").append("<div style='position:relative; width:99%; height:99%;'><textarea id='main_content@"+e+"@"+idmc+"' style='width:263px;height:410px'>"+imageText+"</textarea><button onclick='save_text();' type='button' style='position:absolute; bottom:0; left:0;'>Save</button></div>");	
-				 //$("#textTop").getNiceScroll().resize();
-				}
-			});
-			<!--content bottom images-->
-			<!--send the id of the top sidebar pictire -->
-			$.post("../function/contentBottomImage.php", {data: e }, 
-			<!-- get the bottom pictures  -->
-			function(imageBottom)
-			{
-				$("#contentBottom").empty();
-				var differentPictures=imageBottom.split('#');
-				for(i=1; i<=differentPictures.length-1; i++)
-				{				
-				var idmc=differentPictures[i].split('*')[1].split("%")[1].split("&")[0];
-				var maincontentURL=differentPictures[i].split('*')[0];
-				var imageCheck=differentPictures[i].split('*')[1].split("%")[0];
-					<!--top picture; if imageCheck=top in the database, that image can be display in the imageTop container, in the same page-->
-					if(imageCheck=="top")
+				  $("#contentBottom").empty();
+				  $("#imageTop").empty();
+				  $("#textTop").empty();
+				  $("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div id='main_content@"+e+"@1' class='contentBottom'><img class='imgBottom' src='../images/adminAdd.png' /></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_firstNewFile.php' method='post' enctype='multipart/form-data'><input type='file' name='file' id='contentUploadFirstPicture_"+10+"' ><br><input name='new_name' id='contentFirstNew_name_"+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='images/galeryThumb/' type='hidden' /><input value='"+e+"' name='id_picture' id='content"+e+10+" ' type='hidden' /></form></div>");
+//
+//			
+//<img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a>
+					$('input[type="file"]').change(function() 
 					{
-					    $("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div onclick='headerPutOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");
-				    }
-					<!--normal picture; picture that is displayed in that page and have no functions-->
-					if(imageCheck=="normal")
-					{
-					    $("#contentBottom").append("<div class='contentBottom' style='position:relative'><div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");
-					}
-					<!--galery thumb picture;  top picture = if imageCheck=galery in the database, that image can contain another pictures -->
-					if(imageCheck=="galery")
-					{
-						$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div onclick='headerGaleryClick("+idmc+")'  id='thumbPicture' ><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");				
-					}			
-				}		
-				$('input[type="file"]').change(function() 
-				{
-			
 					//console.log( $(this).val() );
 					var form = $(this).parent('form');
 					form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
-						//alert(	$('textarea').val());
-				});				
+					});
+				}
+				if(rowExist==1)
+				{
+					<!--setting the global variable to clicked number to know which page are we on  -->
+					whichpage=e;
+					
+					$('#page-switcher-start').addClass('hidden');
+					$('#page-switcher-end').addClass('hidden');
+					<!--empty the imageTop and the text container in case they are full-->
+					$("#imageTop").empty();
+					$("#textTop").empty();
+					<!--show the containers -->
+					$("#contentTop").css('display', 'block');
+					$("#contentBottom").css('display', 'block');
+					<!--setting width and height in case they are changed in another entering level -->
+					$("#imageTop").css('max-width','546px');
+					$("#imageTop").css('min-height','410px');
+					$("#imageTop").css('width','546px');
+					<!---//--->
+					$("#textTop").css('max-width','275px');
+					$("#textTop").css('min-height','410px');
+					$("#textTop").css('width','275px');
+					<!--content top image-->
+					<!--send the id of the top sidebar pictire -->
+					$("#textTop").css('height','410px');
+					$('#textTop').css('max-height','410px');
+					$.post("../function/contentTopImage.php", {data: e }, 
+					<!--get the top image and the top text -->
+					
+					
+					function(image_and_text)
+					{ 
+						var pictire_and_text=image_and_text.split('#');
+						for(i=1; i<=pictire_and_text.length-1; i++)
+						{
+						var maincontentURL=pictire_and_text[i].split('*')[0];
+						var imageText=pictire_and_text[i].split('*')[1].split('%')[0];
+						var idmc=pictire_and_text[i].split('*')[1].split('%')[1];
+						$("#imageTop").append("<img  class='imgtopContent' src='"+pom+maincontentURL+"'/>");
+						$("#textTop").append("<div style='position:relative; width:99%; height:99%;'><textarea id='main_content@"+e+"@"+idmc+"' style='width:263px;height:410px'>"+imageText+"</textarea><button onclick='save_text();' type='button' style='position:absolute; bottom:0; left:0;'>Save</button></div>");	
+						 //$("#textTop").getNiceScroll().resize();
+						}
+					});
+					<!--content bottom images-->
+					<!--send the id of the top sidebar pictire -->
+					$.post("../function/contentBottomImage.php", {data: e }, 
+					<!-- get the bottom pictures  -->
+					function(imageBottom)
+					{
+						$("#contentBottom").empty();
+						var differentPictures=imageBottom.split('#');
+						for(i=1; i<=differentPictures.length-1; i++)
+						{				
+						var idmc=differentPictures[i].split('*')[1].split("%")[1].split("&")[0];
+						var maincontentURL=differentPictures[i].split('*')[0];
+						var imageCheck=differentPictures[i].split('*')[1].split("%")[0];
+							<!--top picture; if imageCheck=top in the database, that image can be display in the imageTop container, in the same page-->
+							if(imageCheck=="top")
+							{
+								$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div onclick='headerPutOnTop("+idmc+")' id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");
+							}
+							<!--normal picture; picture that is displayed in that page and have no functions-->
+							if(imageCheck=="normal")
+							{
+								$("#contentBottom").append("<div class='contentBottom' style='position:relative'><div id='thumbPicture' class='contentBottom'><img class='imgBottom' src='"+pom+maincontentURL+"'/></div><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");
+							}
+							<!--galery thumb picture;  top picture = if imageCheck=galery in the database, that image can contain another pictures -->
+							if(imageCheck=="galery")
+							{
+								$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div onclick='headerGaleryClick("+idmc+")'  id='thumbPicture' ><img class='imgBottom' src='"+pom+maincontentURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idmc+10+"' ><br><input name='new_name' id='contentNew_name_"+idmc+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+maincontentURL+"' type='hidden' /><input value='"+idmc+"' name='id_picture' id='content"+idmc+10+" ' type='hidden' /></form></div>");				
+							}			
+						}		
+						$('input[type="file"]').change(function() 
+						{
+					
+							//console.log( $(this).val() );
+							var form = $(this).parent('form');
+							form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
+								//alert(	$('textarea').val());
+						});				
+					});
+				}
 			});
-
 		 }
 		 <!-- pictures that are displayed on the imageTop container if they are clicked -->
 		 function headerPutOnTop(e){
