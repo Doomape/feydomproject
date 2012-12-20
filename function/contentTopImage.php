@@ -9,14 +9,16 @@
 			$slikaTop="";
 			$imageText="";
 			$image_text="";
-			$result = mysql_query("SELECT maincontentURL, imageCheck, imageText,isOnTop FROM main_content where id='".$itemvalue."' ");
+			$idmc="";
+			$result = mysql_query("SELECT idmc, maincontentURL, imageCheck, imageText,isOnTop FROM main_content where id='".$itemvalue."' ");
 			while($row = mysql_fetch_array($result))
 			  {
 					if($row['imageCheck']=="top" && $row['isOnTop']=="true" || $row['imageCheck']=="galery" && $row['isOnTop']=="true")
 					{
 					 $slikaTop=$row['maincontentURL'];
 					 $imageText=$row['imageText'];
-					 $image_text=$image_text."#". $slikaTop."*". $imageText;
+					 $idmc=$row['idmc'];
+					 $image_text=$image_text."#". $slikaTop."*". $imageText."%".$idmc;
 					 }
 			  }
 		mysql_close($con);
