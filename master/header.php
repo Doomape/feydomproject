@@ -193,7 +193,7 @@
 						$("#imageTop").css('max-width','821px');
 						$("#imageTop").css('width','821px');
 						$("#imageTop").css('min-height','410px');*/
-						$("#imageTop").append("<img style='max-height:410px'src='"+galeryURL+"'/>");
+						$("#imageTop").append("<img class='imgtopContent'  src='"+galeryURL+"'/>");
 						$("#textTop").append("<p class='prod_desc'>"+imageText+"</p>");
 						$("#textTop").getNiceScroll().resize();
 						if(videoURL!="/")
@@ -242,7 +242,7 @@
 			// console.log(imageArray);
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
-			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
+			 $("#imageTop").append("<img class='imgtopContent'  src='"+imageArray[imgTxtNext]+"'/>");
 			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
 			  $("#textTop").getNiceScroll().resize();
 		  }
@@ -255,7 +255,7 @@
 			imgTxtNext--;
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
-			 $("#imageTop").append("<img style='max-height:410px'src='"+imageArray[imgTxtNext]+"'/>");
+			 $("#imageTop").append("<img class='imgtopContent' src='"+imageArray[imgTxtNext]+"'/>");
 			 $("#textTop").append("<p class='prod_desc'>"+textArray[imgTxtNext]+"</p>");
 			  $("#textTop").getNiceScroll().resize();
 			 }
