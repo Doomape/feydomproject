@@ -164,7 +164,8 @@
 					imageArray[i]=galeryURL;
 					textArray[i]=imageText;
 					if(mainPicture=="true")
-					{
+					{	
+						imgTxtNext=i;
 						/*$("#imageTop").css('display', 'block');
 						$("#imageTop").css('max-width','821px');
 						$("#imageTop").css('width','821px');
@@ -215,7 +216,7 @@
 		 if(imgTxtNext<imageArray.length-1)
 		 {
 			imgTxtNext++;
-			// console.log(imageArray);
+			console.log(imgTxtNext);
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
 			 $("#imageTop").append("<img class='imgtopContent' src='"+imageArray[imgTxtNext]+"'/>");

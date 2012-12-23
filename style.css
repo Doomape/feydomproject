@@ -164,10 +164,11 @@ h1 {
 	display:block;
 	margin-top:20px;
 	letter-spacing:2px;
+	margin-left: 18px;
 }
 
 .contactInput, textarea {
-	width:250px;
+	width:245px;
 	height:20px;
 	background:#efefef;
 	border-radius:5px;
@@ -178,6 +179,7 @@ h1 {
 	margin-top:3px;
 	font-size:0.9em;
 	color:#3a3a3a;
+	margin-left: 17px;
 }
 
 	input:focus, textarea:focus {
@@ -197,7 +199,7 @@ h1 {
 	border: none;
 	cursor: pointer;
 	bottom: -60px;
-	left: 0px;
+	left: 17px;
 	position: absolute;
 }
 
@@ -254,11 +256,12 @@ position:relative;
 }
 #page-switcher-end
 {
-width: 238.875px; right: 240px; top: 0px; padding-bottom: 0px;
+width: 116.875px;
+right: 262px; top: 0px; padding-bottom: 0px;z-index:100;
 }
 #page-switcher-start
 {
-width: 251.875px; left: 0px; top: 0px; padding-bottom: 0px;
+width: 116.875px; left: 0px; top: 0px; padding-bottom: 0px;z-index:100;
 }
 
 .hidden

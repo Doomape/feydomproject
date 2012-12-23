@@ -136,15 +136,19 @@
 		 <!-- pictures that are displayed on the imageTop container if they are clicked -->
 		 function headerPutOnTop(e){
 			$("#imageTop").empty();
-			$("#textTop").empty();
+			
 			$.post("function/showTopImage.php", {data: e }, 
 			function(topImage)
 			{
 				var topPicture=topImage.split("#")[1].split("%")[0];
 				var topText=topImage.split("#")[1].split("%")[1];
 				$("#imageTop").append("<img class='imgtopContent' src='"+topPicture+"'/>");
-				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
-                                $("#textTop").getNiceScroll().resize();
+				if($('#contact_form').length<1)
+				{
+					$("#textTop").empty();
+					$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+                    $("#textTop").getNiceScroll().resize();
+				}
 
 			});
 		 }
@@ -156,7 +160,6 @@
 			textArray=[];
 			imageArray=[];
 		 	$("#imageTop").empty();
-			$("#textTop").empty();
 			//$("#page-switcher-start").css('visibility','visible');
 			$('#page-switcher-start').removeClass('hidden');
 			$('#page-switcher-end').removeClass('hidden');
@@ -177,54 +180,69 @@
 			function(galeryImages)
 			{
 				var k=0;
+				var counter=0;
 				var differentPictures=galeryImages.split('#');
 				for(i=1; i<=differentPictures.length-1; i++)
 				{
+				//debugger;
+					counter++;
 					mainPicture=differentPictures[i].split('*')[1].split('%')[0];
 					videoURL=differentPictures[i].split('*')[1].split('%')[1].split('$')[1].split('&')[0];
 					galeryURL=differentPictures[i].split('*')[0];
 					idpic=differentPictures[i].split('*')[1].split('%')[1].split('$')[0];
 					imageText=differentPictures[i].split('*')[1].split('%')[1].split('$')[1].split('&')[1];
-					imageArray[i]=galeryURL;
-					textArray[i]=imageText;
+					if(videoURL!="/" && galeryURL=="images/video.png")
+					{
+						counter=counter-1;
+					}
+					else
+					{
+					imageArray[counter]=galeryURL;
+					textArray[counter]=imageText;
+					}
 					if(mainPicture=="true")
 					{
+						imgTxtNext=i;
 						/*$("#imageTop").css('display', 'block');
 						$("#imageTop").css('max-width','821px');
 						$("#imageTop").css('width','821px');
 						$("#imageTop").css('min-height','410px');*/
 						$("#imageTop").append("<img class='imgtopContent'  src='"+galeryURL+"'/>");
-						$("#textTop").append("<p class='prod_desc'>"+imageText+"</p>");
-						$("#textTop").getNiceScroll().resize();
-						if(videoURL!="/")
+						if($('#contact_form').length<1)
+						{
+							$("#textTop").empty();
+							$("#textTop").append("<p class='prod_desc'>"+imageText+"</p>");
+							$("#textTop").getNiceScroll().resize();
+						}
+						/*if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='images/video.png'/></div></a>");
+							//$("#contentBottom").append("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='images/video.png'/></div></a>");
 							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
-							viewer.add(differentPictures[i].split('*')[0]);
-							k++;
+							//viewer.add(differentPictures[i].split('*')[0]);
+							//k++;
 						}
 						else
-						{
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
+						{*/
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div id='"+i+"_"+idpic+"' onclick='headerShowImgTxtOnTop(this)' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 						viewer.add(differentPictures[i].split('*')[0]);
 						k++;
-						}
+						/*}*/
 					}
 					if(mainPicture=="false")
 					{  
 						if(videoURL!="/")
 						{
 							$("#contentBottom").css('display', 'block');
-							$("#contentBottom").append("<a href='javascript: void(0);'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='images/video.png'/></div></a>");
-							$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
-							viewer.add(differentPictures[i].split('*')[0]);
-							k++;
+							$("#contentBottom").prepend("<a href='javascript: void(0);'><div class='contentBottom'><img class='imgBottom' onclick='headerShowOnTop("+idpic+")' src='images/video.png'/></div></a>");
+							//$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
+							//viewer.add(differentPictures[i].split('*')[0]);
+							//k++;
 						}
 						else
 						{
 						$("#contentBottom").css('display', 'block');
-						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")'  class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
+						$("#contentBottom").append("<a href='javascript:void(viewer.show("+k+"))'><div id='"+i+"_"+idpic+"' onclick='headerShowImgTxtOnTop(this)'  class='contentBottom'><img class='imgBottom'  src='"+galeryURL+"'/></div></a>");	
 						viewer.add(differentPictures[i].split('*')[0]);
 						k++;
 						}
@@ -239,7 +257,7 @@
 		 if(imgTxtNext<imageArray.length-1)
 		 {
 			imgTxtNext++;
-			// console.log(imageArray);
+			 console.log(imgTxtNext);
 			 $("#imageTop").empty();
 			 $("#textTop").empty();
 			 $("#imageTop").append("<img class='imgtopContent'  src='"+imageArray[imgTxtNext]+"'/>");
@@ -275,13 +293,14 @@
 				$("#textTop").css('max-width','0px');
 				$("#textTop").css('min-height','0px');
 				$("#textTop").css('width','0px');
-				$("#imageTop").append("<iframe width='821' height='410' src='"+topVideo+"'  frameborder='0' allowfullscreen></iframe>");
+				$("#imageTop").append("<iframe style='z-index:10000;position:absolute' width='821' height='410' src='"+topVideo+"'  frameborder='0' allowfullscreen></iframe>");
 			});
 		 }  
 		 function headerShowImgTxtOnTop(e)
 		 {
+			var split=(e.id).split('_');
+			imgTxtNext=split[0];
 		 	$("#imageTop").empty();
-			$("#textTop").empty();
 			<!--show the containers -->
 			$("#contentTop").css('display', 'block');
 		    $("#contentBottom").css('display', 'block');
@@ -298,14 +317,18 @@
 			$("#textTop").css('height','410px');
 			$('#textTop').css('max-height','410px');
 			
-			$.post("function/showImageTextInGalery.php", {data: e }, 
+			$.post("function/showImageTextInGalery.php", {data: split[1] }, 
 			function(topImage)
 			{
 				var topPicture=topImage.split("#")[1].split("%")[0];
 				var topText=topImage.split("#")[1].split("%")[1];
 				$("#imageTop").append("<img class='imgtopContent' src='"+topPicture+"'/>");
-				$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
-				 $("#textTop").getNiceScroll().resize();
+				if($('#contact_form').length<1)
+				{
+					$("#textTop").empty();
+					$("#textTop").append("<p class='prod_desc'>"+topText+"</p>");
+					 $("#textTop").getNiceScroll().resize();
+				}
 			});
 		 }
 		 
