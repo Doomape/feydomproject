@@ -65,38 +65,63 @@
 					if($row2['isContact']!="true")
 					{
 						if($isStartPage1=="true")
-						echo "<a href='javascript: void(0);'><div id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						echo "<a href='javascript: void(0);'><div class='imgup'><div id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' ></div>
 						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
-						<input type='file' name='file' id="."uploadPicture_".$id."><br>
-						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input type='file' name='file' id="."uploadPicture_".$id."/><br/>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'/>
 						<input name='src' value='".$slikaSideBar."' type='hidden' />
 						<input name='new_name' id="."new_name_".$id."' type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
+							<form class='probaclick1' action='../function/edit_fisrt_level.php' class='editOption' >
+								<select name='firstLevel' id='drop_downFirst@".$idstart."' class='onTopdownList_admin'>
+								<option value='onbottom'>Not start page</option>
+								<option value='ontop'>Start page</option>
+								</select>
+								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
+								<input name='dropID0' value='drop_downFirst@".$idstart."' class='dropdown_0' type='hidden'/>
+							</form>
 						</div>
 						</a>"; 
 						else
-						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+						echo "<a href='javascript: void(0)';><div class='imgup'><div id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' ></div>
 						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
-						<input type='file' name='file' id="."uploadPicture_".$id."><br>
-						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input type='file' name='file' id="."uploadPicture_".$id."/><br/>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'/>
 						<input name='src' value='".$slikaSideBar."' type='hidden' />
 						<input name='new_name' id="."new_name_".$id." type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
+							<form class='probaclick1' action='../function/edit_fisrt_level.php' class='editOption' >
+								<select name='firstLevel' id='drop_downFirst@".$idstart."' class='onTopdownList_admin'>
+								<option value='onbottom'>Not start page</option>
+								<option value='ontop'>Start page</option>
+								</select>
+								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
+								<input name='dropID0' value='drop_downFirst@".$idstart."' class='dropdown_0' type='hidden'/>
+							</form>
 						</div>
 						</a>"; 
 					}
 					else
-					echo "<a href='javascript: void(0)';><div id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' >
+					echo "<a href='javascript: void(0)';><div class='imgup'><div id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom.$slikaSideBar. ") no-repeat' ></div>
 					   <form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
 					
-						<input type='file' name='file' id="."uploadPicture_".$id."><br>
+						<input type='file' name='file' id="."uploadPicture_".$id."/><br/>
 						<input name='new_name' id="."new_name_".$id." type='hidden' />
-						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'/>
 						
 						<input name='src' value='".$slikaSideBar."' type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
+						</form>
+							<form class='probaclick1' action='../function/edit_fisrt_level.php' class='editOption' >
+								<select name='firstLevel' id='drop_downFirst@".$idstart."' class='onTopdownList_admin'>
+								<option value='onbottom'>Not start page</option>
+								<option value='ontop'>Start page</option>
+								</select>
+								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
+								<input name='dropID0' value='drop_downFirst@".$idstart."' class='dropdown_0' type='hidden'/>
+							</form>
 					</div>
 					</a>";
 				}			 
