@@ -40,14 +40,6 @@
 						<input name='new_name' id="."new_name_".$id." type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
-								<form action='../function/edit_fisrt_level.php' class='editOption' method='post' enctype='multipart/form-data'>
-									<select name='firstLevel' id='drop_downFirst@".$idstart." class='onTopdownList_admin'>
-									<option value='onbottom'>Not start page</option>
-									<option value='ontop'>Start page</option>
-									</select>
-									<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
-									<input name='dropID2' value='drop_downFirst@".$idstart." class='' type='hidden'/>
-								</form>
 						</div>
 						</a>"; 
 					}
@@ -63,14 +55,6 @@
 						<input name='src' value='".$slikaSideBar."' type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
-								<form action='../function/edit_fisrt_level.php' class='editOption' method='post' enctype='multipart/form-data'>
-									<select name='firstLevel' id='drop_downFirst@".$idstart." class='onTopdownList_admin'>
-									<option value='onbottom'>Not start page</option>
-									<option value='ontop'>Start page</option>
-									</select>
-									<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
-									<input name='dropID2' value='drop_downFirst@".$idstart." class='' type='hidden'/>
-								</form>
 						</div>
 						</a>";
 					}

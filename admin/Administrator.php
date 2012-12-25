@@ -32,6 +32,20 @@ function logout()
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<style>
+.uploadifyQueueItem
+{
+float: left;
+min-height: 60px;
+min-width: 205px;
+display: block;
+position: relative;
+margin-top: 0px !important;
+padding: 0px !important;
+width: 0px !important;
+}
+</style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script>document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';</script>
 <link rel="stylesheet" type="text/css" href="../style.css">
@@ -47,6 +61,7 @@ function logout()
 </head>
 
 <body>
+
 <div id="wrap">
     <div id="main">
 		<div style="width:1026px; height:30px;position:relative;"><a style="top: 0;right:0;position:absolute; background: url('../images/logout.png');height: 30px;display: block;width: 30px;" href="?run=logout"></a></div>
@@ -66,20 +81,20 @@ function logout()
 			<div id="contentBottom">
 			</div>
         </div>
-        	<!--<div class="uploadform">
+     	<div id="uploadform" class="uploadform" style="display:none">
 				
 				<form id="form1" name="form1" action="">
 					<input type="file" id="file_upload" name="file_upload" /><br />
 					<a id="uploadButton" href="javascript:$('#file_upload').uploadifyUpload();">Додади</a>
 				
-				</form>-->
+				</form>
 			</div>
     </div>
 </div>
 <!--footer-->
 <?php include 'master/footer.php'; ?>
 <script type="text/javascript">
-
+var addedpicture=0;
 function startpage(){
 
 	
@@ -93,29 +108,35 @@ $("#contact").click(function(event){
     $("#textTop").empty();
 	$("#textTop").append("<div id='contact_form'><section class='body'><form method='post' action='/function/sendmail.php'><label>Name</label><input  name='name' placeholder='Type Here'><label>Email</label><input name='email' type='email' placeholder='Type Here'><label>Message</label><textarea name='message' placeholder='Type Here'></textarea><button type='submit' id='submit' name='submit' value='Submit'/></form></section></div>");
 });
-
-/*$("#file_upload").uploadify
-	({
-		'uploader': 'uploadifyit/uploadify.swf',
-		'script': 'uploadifyit/uploadify.php',
-		'cancelImg': 'uploadifyit/cancel.png',
-		'folder': '../images/sidebarImages',
-		'auto': false, // use for auto upload
-		'multi': true,
-		'queueSizeLimit': 1,
-		'onQueueFull': function(event, queueSizeLimit) 
-		{
-			alert("Please don't put anymore files in me! You can upload " + queueSizeLimit + " files at once");
-			return false;
-		},
-		'onComplete': function(event, ID, fileObj, response, data) 
-		{
-			var url_left_sidebar=fileObj.filePath;
-			<!--send the image url to the script that insert that url into the "left_sideBar" table-->
-			
-
-		}
-	});*/
+function baba(e)
+{
+	$("#uploadform").css("display","block");
+	$("#file_upload").uploadify
+		({
+			'uploader': 'uploadifyit/uploadify.swf',
+			'script': 'uploadifyit/uploadify.php',
+			'cancelImg': 'uploadifyit/cancel.png',
+			'folder': '../images/galery',
+			'auto': false, // use for auto upload
+			'multi': true,
+			'queueSizeLimit': 10,
+			'onQueueFull': function(event, queueSizeLimit) 
+			{
+				alert("Please don't put anymore files in me! You can upload " + queueSizeLimit + " files at once");
+				return false;
+			},
+			'onComplete': function(event, ID, fileObj, response, data) 
+			{
+				var url_galery_sidebar=fileObj.filePath;
+				//alert(e);
+				<!--send the image url to the script that insert that url into the "left_sideBar" table-->
+				$.post("../function/insertBottomGaleryImage.php", {data: url_galery_sidebar+"/"+e });
+				addedpicture=1;
+			}
+		});
+		
+		
+}
 </script>
 </body>
 </html>

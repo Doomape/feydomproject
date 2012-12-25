@@ -35,6 +35,5 @@
 	}
 	mysql_close($con);
 
-			
-?>
 
+?>

@@ -11,7 +11,7 @@
 		$isStartPage=null;
 		$idstart=null;
 		$slikalogo=null;
-		
+
 		//get logo image
 		$result1=mysql_query("SELECT sidebarURL FROM left_sidebar where id=0");
 		while($row1 = mysql_fetch_array($result1))
@@ -23,7 +23,7 @@
 		while($row2 = mysql_fetch_array($result))
 		{
 			$isStartPage=$row2['isStartPage'];
-			
+
 			if($isStartPage=="true")
 			{
 					$idstart=$row2['id'];
@@ -53,7 +53,7 @@
 		</form>
 		</div>
 		</a>"; 
-		
+
 		$result2 = mysql_query("SELECT * FROM left_sidebar");
 		while($row2 = mysql_fetch_array($result2)){
 		  		 $slikaSideBar=$row2['sidebarURL'];
@@ -73,14 +73,6 @@
 						<input name='new_name' id="."new_name_".$id."' type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
-							<form action='../function/edit_fisrt_level.php' class='editOption' 
-								<select name='firstLevel' id='drop_downFirst@".$idstart."' class='onTopdownList_admin'>
-								<option value='onbottom'>Not start page</option>
-								<option value='ontop'>Start page</option>
-								</select>
-								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
-								<input name='dropID0' value='drop_downFirst@".$idstart."' class='dropdown_0' type='hidden'/>
-							</form>
 						</div>
 						</a>"; 
 						else
@@ -92,14 +84,6 @@
 						<input name='new_name' id="."new_name_".$id." type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
-						<form action='../function/edit_fisrt_level.php' class='editOption' method='post'>
-								<select name='firstLevel' id='drop_downFirst@".$idstart."' class='onTopdownList_admin'>
-								<option value='onbottom'>Not start page</option>
-								<option value='ontop'>Start page</option>
-								</select>
-								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
-								<input name='dropID0' value='drop_downFirst@".$idstart."' class='dropdown_0' type='hidden'/>
-							</form>
 						</div>
 						</a>"; 
 					}
@@ -113,15 +97,6 @@
 						
 						<input name='src' value='".$slikaSideBar."' type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
-						</form>
-								<form action='../function/edit_fisrt_level.php' class='editOption' method='post'>
-								<select name='firstLevel' id='drop_downFirst@".$idstart."' class='onTopdownList_admin'>
-								<option value='onbottom'>Not start page</option>
-								<option value='ontop'>Start page</option>
-								</select>
-								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
-								<input name='dropID0' value='drop_downFirst@".$idstart."' class='dropdown_0' type='hidden'/>
-							</form>
 					</div>
 					</a>";
 				}			 
@@ -130,6 +105,7 @@
 	?>
 
 	<script type="text/javascript">
+	
 		
 		var pom="../";
 		var whichpage=1;
@@ -160,7 +136,8 @@
 		}
 		function headerClick(e)
 		{
-			  
+			  if(addedpicture==1)
+						window.location = "http://localhost/feydomproject/admin/Administrator.php";	
 			$.post("../function/checkRowExist.php", {data: e+"@main_content" },
 			function(rowExist)
 			{		
@@ -315,7 +292,7 @@
 					//$("#page-switcher-start").css('visibility','visible');
 					$('#page-switcher-start').removeClass('hidden');
 					$('#page-switcher-end').removeClass('hidden');
-					
+						
 						//	<button id="page-switcher-end" class="page-switcher custom-appearance" tabindex="2" style="width: 238.875px; right: 13px; top: 0px; padding-bottom: 0px;" aria-label="Go to Apps">�
 						//	</button>
 						//	id='card-slider-frame' class='sliding_container'
@@ -389,6 +366,7 @@
 								$("#contentBottom").css('display', 'block');
 									$("#contentBottom").append("<div class='contentBottom' style='position:relative'><a href='javascript:void(viewer.show("+k+"))'><div onclick='headerShowImgTxtOnTop("+idpic+")' class='contentBottom'><img class='imgBottom'  src='"+pom+galeryURL+"'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'> <input type='file' name='file' id='contentUploadPicture_"+idpic+10+"' ><br><input name='new_name' id='contentNew_name_"+idpic+10+"' type='hidden' /><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='"+galeryURL+"' type='hidden' /><input value='"+idpic+"' name='id_picture' id='content"+idpic+10+" ' type='hidden' /></form><form class='deleteOption' action='../function/delete_sec_level.php' method='post' enctype='multipart/form-data'><input name='deleteButton' value='galeryImage@"+e+"@"+idpic+"' type='hidden'/><input class='delete_admin' type='submit' name='submit' value='Delete'/></form><form action='../function/edit_last_level.php' class='editOption' method='post' enctype='multipart/form-data'><select name='dropVAL2' id='drop_down2@"+e+"@"+idpic+"' class='onTopdownList_admin'><option value='onbottom'>Don't show on top</option><option value='ontop'>Show on top</option></select><input class='buttondownList_admin' type='submit' name='submit' value='Submit'/><input name='dropID2' value='drop_down@"+e+"@"+idpic+"' class='' type='hidden'/></form></div>");	
 								//viewer.add(differentPictures[i].split('*')[0]);
+							
 								k++;
 								}
 							}
@@ -398,10 +376,12 @@
 							//console.log( $(this).val() );
 							var form = $(this).parent('form');
 							form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
-						});		
+						});	
+						
+						baba(whichgalery);
+						
 					});
 				}
-			
 			});
 		 }
 		 function showNext()
@@ -480,6 +460,8 @@
 				 //$("#textTop").getNiceScroll().resize();
 			});
 		 }
+		 
+
 		 
 	</script>
 
