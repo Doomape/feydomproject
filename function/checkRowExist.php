@@ -20,8 +20,9 @@
 	{
 	$boolRow="";
 	$boolRow1="";
+	$videoid="";
 	mysql_select_db("alienper_feydom", $con);
-	$result=mysql_query("SELECT EXISTS (SELECT * FROM galery WHERE idmc ='".$idmc."') as pom");//return true(1) of false(0)
+	$result=mysql_query("SELECT EXISTS (SELECT * FROM galery WHERE idmc ='".$idmc."' AND galeryURL not like 'images/video.png') as pom");//return true(1) of false(0)
 		while($row = mysql_fetch_array($result))
 		{
 			$boolRow=$row['pom'];
@@ -31,9 +32,16 @@
 		{
 			$boolRow1=$row1['pom1'];
 		}
-		echo $boolRow."@".$boolRow1;
+    $result2=mysql_query("SELECT idpic FROM galery WHERE idmc ='".$idmc."' AND galeryURL like 'images/video.png' ");
+		while($row2 = mysql_fetch_array($result2))
+		{
+			$videoid=$row2['idpic'];
+		}
+	
+		echo $boolRow."@".$boolRow1."@".$videoid;
 	}
 	mysql_close($con);
 
-
+			
 ?>
+

@@ -273,7 +273,11 @@
 						if(rowExist.split('@')[1]==0)	
 						{
 						$("#contentBottom").prepend("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div id='main_content@"+e+"@0' class='contentBottom'><img class='imgBottom' src='../images/video.png'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/insertFirstVideo.php' method='post'><textarea name='videoURL' style='position:absolute;top: 53px;left: -15px;bottom: 0px;width: 180px;height: 60px;'></textarea><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='images/galery/' type='hidden' /><input value='"+e+"' name='id_picture' id='content"+e+10+" ' type='hidden' /></form></div>");
-						}		
+						}
+						else
+						{
+						$("#contentBottom").prepend("<div class='contentBottom' style='position:relative'><a href='javascript: void(0);'><div id='main_content@"+e+"@0' class='contentBottom'><img class='imgBottom' src='../images/video.png'/></div></a><form style='position:absolute;top:0px;left:0px' class='probaclick' action='../function/updateVideo.php' method='post'><textarea name='videoURL' style='position:absolute;top: 53px;left: -15px;bottom: 0px;width: 180px;height: 60px;'></textarea><input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'><input name='src' value='images/galery/' type='hidden' /><input value='"+rowExist.split('@')[2]+"' name='id_picture' id='content"+e+10+" ' type='hidden' /></form></div>");
+						}						
 					 $('input[type="file"]').change(function() 
 					{
 						//console.log( $(this).val() );
