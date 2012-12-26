@@ -21,42 +21,90 @@
 					if($row['isContact']!="true")
 					{
 						if($isStartPage1=="true")
-						echo "<a href='javascript: void(0);'><div id='start' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' >
+						echo "<a href='javascript: void(0);'><div class='imgup'><div id='start' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' ></div>
 						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
-						<input type='file' name='file' id="."uploadPicture_".$id."><br>
-						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input type='file' name='file' id="."uploadPicture_".$id."></input><br/>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'/>
 						<input name='src' value='".$slikaSideBar."' type='hidden' />
-						<input name='new_name' id="."new_name_".$id." type='hidden' />
+						<input name='new_name' id="."new_name_".$id."' type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
+							<form class='probaclick1' action='../function/edit_first_level.php' class='editOption' method='post'>
+								<select name='firstLevel' id='drop_downFirst@".$id."' class='onTopdownList_admin'>
+								<option value='false'>Not start page</option>
+								<option value='true'>Start page</option>
+								</select>
+								<select name='firstLevel_contact' id='drop_downFirst_contact@".$id."' class='onTopdownList_admin_contact'>
+								<option value='false'>Not contact page</option>
+								<option value='true'>Contact page</option>
+								</select>
+								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
+								<input name='dropIDD' value='drop_downFirst@".$id."' class='dropdown_0' type='hidden'/>
+							</form>
+							<form class='deleteOption' action='../function/delete_first_level.php' method='post' enctype='multipart/form-data'>
+								<input name='first_deleteButton' value='".$id."' type='hidden'/>
+								<input class='delete_admin1' type='submit' name='submit' value='Delete'/>
+							</form>
 						</div>
 						</a>"; 
 						else
-						echo "<a href='javascript: void(0)';><div id="."img_".$id." onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' >
+						echo "<a href='javascript: void(0)';><div class='imgup'><div id="."img_".$id." onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' ></div>
 						<form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
-						<input type='file' name='file' id="."uploadPicture_".$id."><br>
-						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input type='file' name='file' id="."uploadPicture_".$id."></input><br/>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'/>
 						<input name='src' value='".$slikaSideBar."' type='hidden' />
 						<input name='new_name' id="."new_name_".$id." type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
+							<form class='probaclick1' action='../function/edit_first_level.php' class='editOption' method='post'>
+								<select name='firstLevel' id='drop_downFirst@".$id."' class='onTopdownList_admin'>
+								<option value='false'>Not start page</option>
+								<option value='true'>Start page</option>
+								</select>
+								<select name='firstLevel_contact' id='drop_downFirst_contact@".$id."' class='onTopdownList_admin_contact'>
+								<option value='false'>Not contact page</option>
+								<option value='true'>Contact page</option>
+								</select>
+								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
+								<input name='dropIDD' value='drop_downFirst@".$id."' class='dropdown_0' type='hidden'/>
+							</form>
+							<form class='deleteOption' action='../function/delete_first_level.php' method='post' enctype='multipart/form-data'>
+								<input name='first_deleteButton' value='".$id."' type='hidden'/>
+								<input class='delete_admin1' type='submit' name='submit' value='Delete'/>
+							</form>
 						</div>
 						</a>"; 
 					}
 					else
 					{
-						echo "<a href='javascript: void(0)';><div id='contact' onclick='sideClick(".$id.")' class='imgside' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' >
+						echo "<a href='javascript: void(0)';><div class='imgup'><div id='contact' onclick='headerClick(".$id.")' class='imgup' style='background:url(" .$pom1.$slikaSideBar. ") no-repeat' ></div>
 					   <form class='probaclick' action='../function/upload_file.php' method='post' enctype='multipart/form-data'>
 					
-						<input type='file' name='file' id="."uploadPicture_".$id."><br>
+						<input type='file' name='file' id="."uploadPicture_".$id."></input><br/>
 						<input name='new_name' id="."new_name_".$id." type='hidden' />
-						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'>
+						<input class='edit_button' style='top: 25px;' type='submit' name='submit' value='Submit'/>
 						
 						<input name='src' value='".$slikaSideBar."' type='hidden' />
 						<input value='".$id."' name='id_picture' id='id_picture' type='hidden' />
 						</form>
-						</div>
-						</a>";
+							<form class='probaclick1' action='../function/edit_first_level.php' class='editOption' method='post'>
+								<select name='firstLevel' id='drop_downFirst@".$id."' class='onTopdownList_admin'>
+								<option value='false'>Not start page</option>
+								<option value='true'>Start page</option>
+								</select>
+								<select name='firstLevel_contact' id='drop_downFirst_contact@".$id."' class='onTopdownList_admin_contact'>
+								<option value='false'>Not contact page</option>
+								<option value='true'>Contact page</option>
+								</select>
+								<input class='buttondownList_admin' type='submit' name='submit' value='Submit'/>
+								<input name='dropIDD' value='drop_downFirst@".$id."' class='dropdown_0' type='hidden'/>
+							</form>
+							<form class='deleteOption' action='../function/delete_first_level.php' method='post' enctype='multipart/form-data'>
+								<input name='first_deleteButton' value='".$id."' type='hidden'/>
+								<input class='delete_admin1' type='submit' name='submit' value='Delete'/>
+							</form>
+					</div>
+					</a>";
 					}
 				 }
 				
@@ -69,7 +117,7 @@
 		 }
 		 $pom=$idM+1;
 		 $addPicture="../images/adminAdd.png";
-		  echo "<a href='javascript: void(0)';><div id="."img_".$pom." class='imgside' style='background:url(".$addPicture.") no-repeat' >
+		  echo "<a href='javascript: void(0)';><div id="."img_".$pom." class='imgup' style='background:url(".$addPicture.") no-repeat' >
 		  	
 			<form class='probaclick' action='../function/upload_left_picture.php' method='post' enctype='multipart/form-data'>
 				<input type='file' name='file' id="."uploadPicture_".$pom."><br>
@@ -84,7 +132,7 @@
 	?>
 
 	<script type="text/javascript">
-		
+	/*	
 		$('input[type="file"]').change(function() 
 		{
 			//console.log( $(this).val() );
@@ -216,7 +264,7 @@
 			//$("#contentTop").append("<button id='page-switcher-start' class='page-switcher custom-appearance' tabindex='2' style='width: 251.875px; left: 0px; top: 0px; padding-bottom: 0px;' aria-label='Go Back'><</button>");
 			/*$("#textTop").css('max-width','0px');
 			$("#textTop").css('min-height','0px');
-			$("#textTop").css('width','0px');*/
+			$("#textTop").css('width','0px');
 		    $("#contentBottom").empty();
 			<!-- send the id of the galery that is clicked -->
 			$.post("../function/galery.php", {data: e }, 
@@ -239,7 +287,7 @@
 						/*$("#imageTop").css('display', 'block');
 						$("#imageTop").css('max-width','821px');
 						$("#imageTop").css('width','821px');
-						$("#imageTop").css('min-height','410px');*/
+						$("#imageTop").css('min-height','410px');
 						$("#imageTop").append("<img style='max-height:410px'src='"+pom+galeryURL+"'/>");
 						$("#textTop").append("<p class='prod_desc'>"+imageText+"</p>");
 						//$("#textTop").getNiceScroll().resize();
@@ -355,7 +403,7 @@
 				 //$("#textTop").getNiceScroll().resize();
 			});
 		 }
-		 
+	*/	 
 	</script>
 	
 	
