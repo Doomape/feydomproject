@@ -173,8 +173,7 @@
 		}
 		function headerClick(e)
 		{
-			  if(addedpicture==1)
-						window.location = "http://localhost/feydomproject/admin/Administrator.php";	
+			 $('#uploadform').css('display','none');
 			$.post("../function/checkRowExist.php", {data: e+"@main_content" },
 			function(rowExist)
 			{		

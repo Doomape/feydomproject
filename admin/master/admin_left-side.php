@@ -132,14 +132,14 @@
 	?>
 
 	<script type="text/javascript">
-	/*	
+	
 		$('input[type="file"]').change(function() 
 		{
 			//console.log( $(this).val() );
 			var form = $(this).parent('form');
 			form.find('input[name="new_name"]').val( $(this).val().split('\\')[$(this).val().split('\\').length-1] );
 		});
-		
+		/*
 		var pom="../";
 		var imgTxtNext=1;
 		var viewer = null;

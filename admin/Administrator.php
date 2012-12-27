@@ -53,7 +53,6 @@ width: 0px !important;
 <script type="text/javascript" src="../Scripts/slide.js"></script>
 <link rel="stylesheet" type="text/css" href="admin_style.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="../style.css">
 <script type="text/javascript" src="uploadifyit/swfobject.js"></script>
 <script type="text/javascript" src="uploadifyit/jquery.uploadify.v2.1.4.min.js"></script>
 <link rel="stylesheet" href="uploadifyit/uploadify.css" type="text/css" />
@@ -110,7 +109,11 @@ $("#contact").click(function(event){
 });
 function baba(e)
 {
+	
 	$("#uploadform").css("display","block");
+	if(addedpicture==0)
+	{
+	addedpicture=1;
 	$("#file_upload").uploadify
 		({
 			'uploader': 'uploadifyit/uploadify.swf',
@@ -132,8 +135,15 @@ function baba(e)
 				<!--send the image url to the script that insert that url into the "left_sideBar" table-->
 				$.post("../function/insertBottomGaleryImage.php", {data: url_galery_sidebar+"/"+e });
 				addedpicture=1;
+			},
+			'onAllComplete': function(event, ID, fileObj, response, data) 
+			{
+				$('#uploadform').css('display','none');
+				window.location = "http://localhost/feydomproject/admin/Administrator.php";
+				
 			}
 		});
+		}
 		
 		
 }

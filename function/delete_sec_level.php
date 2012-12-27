@@ -10,6 +10,16 @@ $imageCheck=$pom[0];
 $id=$pom[1];
 $idmc=$pom[2];
 $idpic=$pom[2];
+/*
+echo $imageCheck;
+echo "<br/>";
+echo $id;
+echo "<br/>";
+echo $idmc;
+echo "<br/>";
+echo $idpic;
+echo "<br/>";
+*/
 if($imageCheck==="galeryImage")
 {
 	mysql_select_db("alienper_feydom", $con);
@@ -33,7 +43,7 @@ if($imageCheck==="galery")
 	}
 
 	mysql_query("delete from galery where idmc='".$idmc."' ");
-	mysql_query("delete from main_content where id='".$id."' ");
+	mysql_query("delete from main_content where idmc='".$idmc."' ");
 }
 else
 {
@@ -44,7 +54,7 @@ else
 					 $main_url=$row1['maincontentURL'];
 					 unlink("../".$main_url);
 		}
-		mysql_query("delete from main_content where id='".$id."' ");
+		mysql_query("delete from main_content where idmc='".$idmc."' ");
 
 }
 mysql_close($con);
